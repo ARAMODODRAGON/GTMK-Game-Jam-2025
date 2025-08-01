@@ -1,121 +1,115 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
 
-	//InputAction moveAction;
+	// input
+	[SerializeField] private InputActionReference moveAction;
+	[SerializeField] private InputActionReference jumpAction;
+	[SerializeField] private InputActionReference damageAction;
+	//PlayerInput playerInput;
 
-	public InputActionReference moveAction;
-	public InputActionReference jumpAction;
-	public InputActionReference damageAction;
+	// components
+	private BoxCollider2D boxCollider;
+	private Rigidbody2D rb;
+	private SplineAnimate spline;
 
-	Vector2 moveDirection;
+	// physics
+	[SerializeField] private PlayerStats m_stats;
+	[SerializeField] private LayerMask m_groundLayer;
+	[SerializeField] private float m_groundCheckDistance = 1f;
 
-	PlayerInput playerInput;
+	// references
+	[SerializeField] private BallController m_ball;
 
-	Rigidbody2D rb;
+	// everything else
+	private bool m_lastjumpinput = true;
 
-	[SerializeField]
-	float moveSpeed;
-
-	BoxCollider2D boxCollider;
-
-	[SerializeField]
-	LayerMask groundLayer;
-
-	public float groundCheckDistance = 1f;
-
-	public float jumpHeight;
-
-	[SerializeField]
-	BallController ball;
-
-	SplineAnimate spline;
-
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
-
-	private void Awake()
-	{
-	}
-
-	void Start()
-    {
+	// used to get components
+	private void Awake() {
 		rb = GetComponent<Rigidbody2D>();
 		boxCollider = GetComponent<BoxCollider2D>();
 
-		if (ball != null)
-		{
-			spline = ball.gameObject.GetComponent<SplineAnimate>();
+		if (m_ball != null) {
+			spline = m_ball.gameObject.GetComponent<SplineAnimate>();
 		}
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-		UpdateMovementVector();
-		CheckGround();
-		HandleJumping();
-		HandleDamage();
+	// initialization
+	private void Start() {
+		if (m_stats == null) {
+			enabled = false;
+			Debug.LogError("stats was not set on player \"" + name + "\"");
+			return;
+		}
 	}
 
-	void UpdateMovementVector()
-	{
-		moveDirection = moveAction.action.ReadValue<Vector2>();
-
-		//Debug.Log(moveDirection.x + " " + moveDirection.y);
+	// update is called once per frame
+	void Update() {
+		// send input to ball
+		if (damageAction.action.WasPressedThisFrame()) {
+			m_ball.StopBall();
+		}
 	}
 
-	bool CheckGround()
-	{
-		RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundCheckDistance, groundLayer);
+	// used to handle physics
+	void FixedUpdate() {
+		if (!m_stats) return; // just make sure we can actually update physics lol
 
-		Color colour;
+		// get our input
+		Vector2 _inputDirection = moveAction.action.ReadValue<Vector2>();
+		bool _inputJump = jumpAction.action.IsPressed();
+		bool _inputPressedJump = _inputJump && !m_lastjumpinput;
 
-		if (hit.collider != null)
-		{
-			colour = Color.green;
-			Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
-			Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
-			Debug.DrawRay(boxCollider.bounds.center - new Vector3(0, boxCollider.bounds.extents.y), Vector2.right * (boxCollider.bounds.extents.x), colour);
+		// call to handle physics
+		HandlePhysics(Time.fixedDeltaTime, _inputDirection, _inputJump);
 
-			return true;
+		// store jump input for next step
+		m_lastjumpinput = _inputJump;
+	}
+
+	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputPressedJump) {
+
+		rb.linearVelocity = new Vector2(inputDirection.x * m_stats.moveSpeed * Time.fixedDeltaTime, rb.linearVelocityY);
+
+		if (inputPressedJump && TouchingGround()) {
+			Debug.Log("Jump");
+			rb.AddForceY(m_stats.jumpHeight, ForceMode2D.Impulse);
 		}
-		else
-		{
-			colour = Color.red;
-		}
 
-		Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
-		Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
-		Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y + groundCheckDistance), Vector2.right * (boxCollider.bounds.extents.x), colour);
+	}
+
+	bool TouchingGround() {
 
 
 		return false;
 	}
 
-	void HandleJumping()
-	{
-		if (jumpAction.action.WasPressedThisFrame() && CheckGround())
-		{
-			Debug.Log("Jump");
-			rb.AddForceY(jumpHeight , ForceMode2D.Impulse);
-		}
-	}
+	//bool CheckGround() {
+	//	RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundCheckDistance, groundLayer);
+	//
+	//	Color colour;
+	//
+	//	if (hit.collider != null) {
+	//		colour = Color.green;
+	//		Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
+	//		Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
+	//		Debug.DrawRay(boxCollider.bounds.center - new Vector3(0, boxCollider.bounds.extents.y), Vector2.right * (boxCollider.bounds.extents.x), colour);
+	//
+	//		return true;
+	//	} else {
+	//		colour = Color.red;
+	//	}
+	//
+	//	Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
+	//	Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
+	//	Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y + groundCheckDistance), Vector2.right * (boxCollider.bounds.extents.x), colour);
+	//
+	//
+	//	return false;
+	//}
 
-	void HandleDamage()
-	{
-		if (damageAction.action.WasPressedThisFrame())
-		{
-			ball.StopBall();
-		}
-	}
 
-	private void FixedUpdate()
-	{
-		rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed * Time.fixedDeltaTime, rb.linearVelocityY);
-
-		//rb.AddForceX(moveDirection.x * moveSpeed, ForceMode2D.Force);
-	}
 }
