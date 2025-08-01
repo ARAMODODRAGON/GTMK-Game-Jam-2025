@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   acceleration: 50
-  jumpInitialSpeed: 8
-  fallAcceleration: 10
-  maxFallSpeed: 0
+  jumpInitialSpeed: 17
+  fallAcceleration: 40
+  fallMultiplier: 3
+  maxFallSpeed: 20
+  wallJumpInitialSpeed: 11
+  wallJumpLaunchSpeed: 10
+  maxSlideSpeed: 3
+  slideAcceleration: 3

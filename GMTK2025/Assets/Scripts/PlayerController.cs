@@ -6,13 +6,11 @@ using UnityEngine.Splines;
 public class PlayerController : MonoBehaviour {
 
 	// input
+	[Header("Input")]
 	public InputActionReference moveAction;
 	public InputActionReference jumpAction;
 	public InputActionReference damageAction;
 	//PlayerInput playerInput;
-
-	// coyote time settings
-	[SerializeField] private float m_jumpCoyoteTime;
 
 	// components
 	private BoxCollider2D m_boxCollider;
@@ -20,15 +18,20 @@ public class PlayerController : MonoBehaviour {
 	//private SplineAnimate m_spline;
 
 	// physics
+	[Header("Physics")]
 	[SerializeField] private PlayerStats m_stats;
 	[SerializeField] private LayerMask m_solidLayer;
 	[SerializeField] private float m_touchingDistance;
 
 	// references
+	[Header("References")]
 	[SerializeField] private BallController m_ball;
 
 	// private variables
 	private bool m_lastjumpinput = true;
+	private bool m_touchingGround = false;
+	private bool m_touchingLeftWall = false;
+	private bool m_touchingRightWall = false;
 
 	// used to get components
 	private void Awake() {
@@ -66,14 +69,16 @@ public class PlayerController : MonoBehaviour {
 		bool _inputJump = jumpAction.action.IsPressed();
 		bool _inputPressedJump = (_inputJump == true) && (m_lastjumpinput == false);
 
-		// call to handle physics
-		HandlePhysics(Time.fixedDeltaTime, _inputDirection, _inputPressedJump);
+		// calls to handle physics
+		UpdateTouchings();
+		HandlePhysics(Time.fixedDeltaTime, _inputDirection, _inputJump, _inputPressedJump);
 
 		// store jump input for next step
 		m_lastjumpinput = _inputJump;
 	}
 
-	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputPressedJump) {
+	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputJumpHeld, bool inputPressedJump) {
+		// get velocity
 		Vector2 _velocity = m_rigidbody.linearVelocity;
 
 		// handle horizontal
@@ -84,21 +89,51 @@ public class PlayerController : MonoBehaviour {
 			m_stats.acceleration * delta
 		);
 
-		// handle gravity
-		_velocity.y -= m_stats.fallAcceleration * delta;
+		// handle gravity 
+		float _targetFallMultiplier = 1.0f;
+		if (!inputJumpHeld && _velocity.y > 0.0f) 
+			_targetFallMultiplier = m_stats.fallMultiplier;
 
-		// handle jump
-		if (inputPressedJump && IsTouchingGround() && _velocity.y <= Util.very_small) {
-			_velocity.y = m_stats.jumpInitialSpeed;
+		float _targetFallAcceleration = m_stats.fallAcceleration * _targetFallMultiplier;
+		float _targetMaxFallSpeed = m_stats.maxFallSpeed;
+
+		if (!m_touchingGround && (_velocity.y < Util.very_small)) {
+			if ((inputDirection.x < 0.0f) && m_touchingLeftWall) {
+				_targetMaxFallSpeed = m_stats.maxSlideSpeed;
+				_targetFallAcceleration = m_stats.slideAcceleration;
+			}
+			if ((inputDirection.x > 0.0f) && m_touchingRightWall) {
+				_targetMaxFallSpeed = m_stats.maxSlideSpeed;
+				_targetFallAcceleration = m_stats.slideAcceleration;
+			}
 		}
 
-		// apply velocity
+		_velocity.y -= _targetFallAcceleration * delta;
+		_velocity.y = Mathf.Max(_velocity.y, -_targetMaxFallSpeed);
+
+		// handle jump
+
+		// touching ground
+		if (inputPressedJump && m_touchingGround) {
+			_velocity.y = m_stats.jumpInitialSpeed;
+		}
+		// else touching either wall (using != garuntees its one *or* the other)
+		else if (inputPressedJump && (m_touchingLeftWall != m_touchingRightWall)) {
+			float direction = (m_touchingLeftWall ? 1.0f : -1.0f);
+
+			_velocity.y = m_stats.wallJumpInitialSpeed;
+			_velocity.x = direction * m_stats.wallJumpLaunchSpeed;
+		}
+
+		// set velocity
 		m_rigidbody.linearVelocity = _velocity;
-		//rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + velocity * delta);
 	}
 
-	bool IsTouchingGround() {
-		return IsTouchingSurface(Vector2.down);
+	// wasnt sure what to name this lol
+	void UpdateTouchings() {
+		m_touchingGround = IsTouchingSurface(Vector2.down);
+		m_touchingLeftWall = IsTouchingSurface(Vector2.left);
+		m_touchingRightWall = IsTouchingSurface(Vector2.right);
 	}
 
 	bool IsTouchingSurface(Vector2 direction) {
