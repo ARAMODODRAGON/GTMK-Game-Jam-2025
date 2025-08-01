@@ -12,12 +12,12 @@ public class PlayerController : MonoBehaviour {
 	//PlayerInput playerInput;
 
 	// coyote time settings
-	//[SerializeField] private float m_
+	[SerializeField] private float m_jumpCoyoteTime;
 
 	// components
-	private BoxCollider2D boxCollider;
-	private Rigidbody2D rb;
-	private SplineAnimate spline;
+	private BoxCollider2D m_boxCollider;
+	private Rigidbody2D m_rigidbody;
+	//private SplineAnimate m_spline;
 
 	// physics
 	[SerializeField] private PlayerStats m_stats;
@@ -32,12 +32,12 @@ public class PlayerController : MonoBehaviour {
 
 	// used to get components
 	private void Awake() {
-		rb = GetComponent<Rigidbody2D>();
-		boxCollider = GetComponent<BoxCollider2D>();
+		m_rigidbody = GetComponent<Rigidbody2D>();
+		m_boxCollider = GetComponent<BoxCollider2D>();
 
-		if (m_ball != null) {
-			spline = m_ball.gameObject.GetComponent<SplineAnimate>();
-		}
+		//if (m_ball != null) {
+		//	m_spline = m_ball.gameObject.GetComponent<SplineAnimate>();
+		//}
 	}
 
 	// initialization
@@ -74,11 +74,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputPressedJump) {
-		Vector2 _velocity = rb.linearVelocity;
+		Vector2 _velocity = m_rigidbody.linearVelocity;
 
 		// handle horizontal
 		float _targetMaxSpeed = m_stats.maxSpeed * inputDirection.x;
-		_velocity.x = Util.MoveToward(_velocity.x, _targetMaxSpeed, m_stats.acceleration * delta);
+		_velocity.x = Util.MoveToward(
+			_velocity.x,
+			_targetMaxSpeed,
+			m_stats.acceleration * delta
+		);
 
 		// handle gravity
 		_velocity.y -= m_stats.fallAcceleration * delta;
@@ -89,7 +93,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// apply velocity
-		rb.linearVelocity = _velocity;
+		m_rigidbody.linearVelocity = _velocity;
 		//rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + velocity * delta);
 	}
 
@@ -99,8 +103,8 @@ public class PlayerController : MonoBehaviour {
 
 	bool IsTouchingSurface(Vector2 direction) {
 		RaycastHit2D _hit = Physics2D.BoxCast(
-			boxCollider.bounds.center,
-			boxCollider.bounds.size,
+			m_boxCollider.bounds.center,
+			m_boxCollider.bounds.size,
 			0f,
 			direction,
 			m_touchingDistance,

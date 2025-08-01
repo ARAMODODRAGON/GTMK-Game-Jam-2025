@@ -229,6 +229,7 @@ MonoBehaviour:
   moveAction: {fileID: -1680190386980627800, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   damageAction: {fileID: 1120369429361536294, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
+  m_jumpCoyoteTime: 0
   m_stats: {fileID: 11400000, guid: 9a582c758ee6af944a518729e9cc3684, type: 2}
   m_solidLayer:
     serializedVersion: 2
@@ -328,23 +329,23 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5874593570251077712}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: ac57c55325d5c364398fa5455012a346, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &6401526538499995642
@@ -357,7 +358,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ac57c55325d5c364398fa5455012a346, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
