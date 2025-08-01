@@ -6,10 +6,13 @@ using UnityEngine.Splines;
 public class PlayerController : MonoBehaviour {
 
 	// input
-	[SerializeField] private InputActionReference moveAction;
-	[SerializeField] private InputActionReference jumpAction;
-	[SerializeField] private InputActionReference damageAction;
+	public InputActionReference moveAction;
+	public InputActionReference jumpAction;
+	public InputActionReference damageAction;
 	//PlayerInput playerInput;
+
+	// coyote time settings
+	//[SerializeField] private float m_
 
 	// components
 	private BoxCollider2D boxCollider;
@@ -64,29 +67,29 @@ public class PlayerController : MonoBehaviour {
 		bool _inputPressedJump = (_inputJump == true) && (m_lastjumpinput == false);
 
 		// call to handle physics
-		HandlePhysics(Time.fixedDeltaTime, _inputDirection, _inputJump);
+		HandlePhysics(Time.fixedDeltaTime, _inputDirection, _inputPressedJump);
 
 		// store jump input for next step
 		m_lastjumpinput = _inputJump;
 	}
 
 	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputPressedJump) {
-		Vector2 velocity = rb.linearVelocity;
+		Vector2 _velocity = rb.linearVelocity;
 
 		// handle horizontal
-		velocity.x = inputDirection.x * m_stats.moveSpeed;
+		float _targetMaxSpeed = m_stats.maxSpeed * inputDirection.x;
+		_velocity.x = Util.MoveToward(_velocity.x, _targetMaxSpeed, m_stats.acceleration * delta);
 
 		// handle gravity
-		velocity.y -= m_stats.fallAcceleration * delta;
+		_velocity.y -= m_stats.fallAcceleration * delta;
 
 		// handle jump
-		if (inputPressedJump && IsTouchingGround()) {
-			Debug.Log("Jump");
-			velocity.y = m_stats.jumpInitialSpeed;
+		if (inputPressedJump && IsTouchingGround() && _velocity.y <= Util.very_small) {
+			_velocity.y = m_stats.jumpInitialSpeed;
 		}
 
 		// apply velocity
-		rb.linearVelocity = velocity;
+		rb.linearVelocity = _velocity;
 		//rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + velocity * delta);
 	}
 

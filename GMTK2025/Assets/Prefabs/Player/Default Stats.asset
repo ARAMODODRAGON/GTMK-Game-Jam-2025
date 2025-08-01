@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896e1877dadd07b4f8fe9abe7287d74e, type: 3}
   m_Name: Default Stats
   m_EditorClassIdentifier: 
-  moveSpeed: 40
+  maxSpeed: 10
+  acceleration: 50
   jumpInitialSpeed: 8
-  fallAcceleration: 1
+  fallAcceleration: 10
   maxFallSpeed: 0
