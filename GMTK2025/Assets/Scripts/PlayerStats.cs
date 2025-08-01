@@ -5,9 +5,14 @@ using UnityEngine;
 public class PlayerStats : ScriptableObject {
 
 	// the maximum movement speed of the player
-	[SerializeField] public float moveSpeed;
+	public float moveSpeed;
 
 	// the initial velocity at the begining of your jump
-	[SerializeField] public float jumpHeight;
+	public float jumpInitialSpeed;
 
+	// gravity
+	public float fallAcceleration;
+
+	// the maximum fall speed
+	public float maxFallSpeed;
 }

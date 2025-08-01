@@ -18,13 +18,13 @@ public class PlayerController : MonoBehaviour {
 
 	// physics
 	[SerializeField] private PlayerStats m_stats;
-	[SerializeField] private LayerMask m_groundLayer;
-	[SerializeField] private float m_groundCheckDistance = 1f;
+	[SerializeField] private LayerMask m_solidLayer;
+	[SerializeField] private float m_touchingDistance;
 
 	// references
 	[SerializeField] private BallController m_ball;
 
-	// everything else
+	// private variables
 	private bool m_lastjumpinput = true;
 
 	// used to get components
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 		// get our input
 		Vector2 _inputDirection = moveAction.action.ReadValue<Vector2>();
 		bool _inputJump = jumpAction.action.IsPressed();
-		bool _inputPressedJump = _inputJump && !m_lastjumpinput;
+		bool _inputPressedJump = (_inputJump == true) && (m_lastjumpinput == false);
 
 		// call to handle physics
 		HandlePhysics(Time.fixedDeltaTime, _inputDirection, _inputJump);
@@ -71,20 +71,40 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputPressedJump) {
+		Vector2 velocity = rb.linearVelocity;
 
-		rb.linearVelocity = new Vector2(inputDirection.x * m_stats.moveSpeed * Time.fixedDeltaTime, rb.linearVelocityY);
+		// handle horizontal
+		velocity.x = inputDirection.x * m_stats.moveSpeed;
 
-		if (inputPressedJump && TouchingGround()) {
+		// handle gravity
+		velocity.y -= m_stats.fallAcceleration * delta;
+
+		// handle jump
+		if (inputPressedJump && IsTouchingGround()) {
 			Debug.Log("Jump");
-			rb.AddForceY(m_stats.jumpHeight, ForceMode2D.Impulse);
+			velocity.y = m_stats.jumpInitialSpeed;
 		}
 
+		// apply velocity
+		rb.linearVelocity = velocity;
+		//rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + velocity * delta);
 	}
 
-	bool TouchingGround() {
+	bool IsTouchingGround() {
+		return IsTouchingSurface(Vector2.down);
+	}
 
+	bool IsTouchingSurface(Vector2 direction) {
+		RaycastHit2D _hit = Physics2D.BoxCast(
+			boxCollider.bounds.center,
+			boxCollider.bounds.size,
+			0f,
+			direction,
+			m_touchingDistance,
+			m_solidLayer
+		);
 
-		return false;
+		return _hit;
 	}
 
 	//bool CheckGround() {
