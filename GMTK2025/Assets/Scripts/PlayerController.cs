@@ -3,7 +3,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 
-public class PlayerController : MonoBehaviour {
+
+public interface IDamageable
+{
+	void OnTakeDamage();
+}
+
+public class PlayerController : MonoBehaviour, IDamageable {
 
 	// input
 	[Header("Input")]
@@ -70,7 +76,7 @@ public class PlayerController : MonoBehaviour {
 		bool _inputPressedJump = (_inputJump == true) && (m_lastjumpinput == false);
 
 		// calls to handle physics
-		UpdateTouchings();
+		SurfaceCheck();
 		HandlePhysics(Time.fixedDeltaTime, _inputDirection, _inputJump, _inputPressedJump);
 
 		// store jump input for next step
@@ -130,7 +136,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	// wasnt sure what to name this lol
-	void UpdateTouchings() {
+
+	//Fixed it
+	void SurfaceCheck() {
 		m_touchingGround = IsTouchingSurface(Vector2.down);
 		m_touchingLeftWall = IsTouchingSurface(Vector2.left);
 		m_touchingRightWall = IsTouchingSurface(Vector2.right);
@@ -147,6 +155,13 @@ public class PlayerController : MonoBehaviour {
 		);
 
 		return _hit;
+	}
+
+	public void OnTakeDamage()
+	{
+		// Filler function for now, will add proper damage logic later.
+
+		Debug.Log("Damage Taken");
 	}
 
 	//bool CheckGround() {

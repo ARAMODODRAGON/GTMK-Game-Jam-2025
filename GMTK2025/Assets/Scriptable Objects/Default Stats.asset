@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Default Stats
   m_EditorClassIdentifier: 
   maxSpeed: 10
-  acceleration: 50
-  jumpInitialSpeed: 17
+  acceleration: 100
+  jumpInitialSpeed: 20
   fallAcceleration: 40
   fallMultiplier: 3
   maxFallSpeed: 20

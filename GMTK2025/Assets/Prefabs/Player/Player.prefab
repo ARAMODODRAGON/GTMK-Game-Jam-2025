@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 1557816671660899360}
   - component: {fileID: 5373260166614362101}
   - component: {fileID: 8887210459747253833}
+  - component: {fileID: 6387458213399012891}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Damageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -126,7 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7347041030de4fe41a6c8b356a303a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BallStopTime: 1
+  ballStopTime: 1
+  shouldBallDamageFor1Frame: 0
+  hitStopTime: 1
 --- !u!58 &5373260166614362101
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -175,7 +178,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7347041030de4fe41a6c8b356a303a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BallStopTime: 1
+  ballStopTime: 1
+  shouldBallDamageFor1Frame: 1
+  hitStopTime: 0.5
+--- !u!114 &6387458213399012891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715203862463763384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefa59bd1f8e7d54d837b8c4b2461055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5874593570251077712
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +246,6 @@ MonoBehaviour:
   moveAction: {fileID: -1680190386980627800, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   damageAction: {fileID: 1120369429361536294, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
-  m_jumpCoyoteTime: 0
   m_stats: {fileID: 11400000, guid: 9a582c758ee6af944a518729e9cc3684, type: 2}
   m_solidLayer:
     serializedVersion: 2

@@ -4,7 +4,13 @@ using UnityEngine.Splines;
 public class BallController : MonoBehaviour
 {
 	[SerializeField]
-	float BallStopTime;
+	float ballStopTime;
+	[SerializeField]
+	bool shouldBallDamageFor1Frame;
+	[SerializeField]
+	float hitStopTime;
+	bool canDamage = false;
+
 	float currentTimer;
 	bool isRunningTimer = false;
 
@@ -13,14 +19,16 @@ public class BallController : MonoBehaviour
 
 	SpriteRenderer spriteRenderer;
 
+	HitStop hitStop;
+
 	private void Start()
 	{
 		spline = GetComponent<SplineAnimate>();
 		circleCollider = GetComponent<CircleCollider2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		hitStop = GetComponent<HitStop>();
 
 		circleCollider.enabled = false;
-		isRunningTimer = false;
 
 		spriteRenderer.color = Color.blue;
 	}
@@ -30,39 +38,56 @@ public class BallController : MonoBehaviour
 		if (!isRunningTimer)
 		{
 			spriteRenderer.color = Color.red;
-			currentTimer = BallStopTime;
+			currentTimer = ballStopTime;
 			isRunningTimer = true;
 			spline.Pause();
 			circleCollider.enabled = true;
+			canDamage = true;
 		}
 
 	}
 
 	void StartBall()
 	{
+		//Debug.Log("Start Ball");
+
 		spriteRenderer.color = Color.blue;
 		isRunningTimer = false;
 		circleCollider.enabled = false;
 		spline.Play();
+		canDamage = false;
 	}
 
 	void Update()
 	{
 		if (currentTimer > 0)
 		{
+			//Debug.Log("CountingDown");
 			currentTimer -= Time.deltaTime;
-			if(currentTimer <= 0)
+			if (currentTimer <= 0)
 			{
 				StartBall();
+			}
+
+			if (shouldBallDamageFor1Frame && canDamage == true)
+			{
+				canDamage = false;
 			}
 		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.gameObject.CompareTag("Damageable"))
+		if (canDamage == false || col == this)
 		{
-			Debug.Log("Damage Dealt");
+			return;
+		}
+
+		IDamageable damageable = col.gameObject.GetComponent<IDamageable>();
+		if (damageable != null)
+		{
+			damageable.OnTakeDamage();
+			hitStop.StartHitStop(hitStopTime);
 		}
 	}
 }
