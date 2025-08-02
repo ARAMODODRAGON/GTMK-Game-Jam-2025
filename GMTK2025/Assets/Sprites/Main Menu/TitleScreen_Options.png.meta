@@ -43,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -57,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -81,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -135,19 +135,19 @@ TextureImporter:
       name: TitleScreen_Options_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 71
-        width: 66
-        height: 18
+        x: 0
+        y: 32
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c7cc639712a75ed70800000000000000
+      spriteID: 6499827f810ac704f9d2ff848247b38f
       internalID: 9071791308593876092
       vertices: []
       indices: 
@@ -157,19 +157,19 @@ TextureImporter:
       name: TitleScreen_Options_1
       rect:
         serializedVersion: 2
-        x: 15
-        y: 39
-        width: 66
-        height: 18
+        x: 0
+        y: 16
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2c8b2301395cc5900800000000000000
+      spriteID: ca229447fb88a3f4588f21478a5363fa
       internalID: 674631279621355714
       vertices: []
       indices: 
@@ -179,19 +179,19 @@ TextureImporter:
       name: TitleScreen_Options_2
       rect:
         serializedVersion: 2
-        x: 15
-        y: 7
-        width: 66
-        height: 18
+        x: 0
+        y: 0
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3df6bc688384b9250800000000000000
+      spriteID: d097e62f24604294894cf7f4acc4d242
       internalID: 5952430740117090259
       vertices: []
       indices: 
@@ -201,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 166d81e327096f5488ed39580519b942
     internalID: 0
     vertices: []
     indices: 
@@ -209,7 +209,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       TitleScreen_Options_0: 9071791308593876092
       TitleScreen_Options_1: 674631279621355714
