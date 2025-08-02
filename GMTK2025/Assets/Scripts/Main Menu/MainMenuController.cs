@@ -47,7 +47,16 @@ public class MainMenuController : MonoBehaviour {
 
 	// called when a menu wants to change to another menu
 	private void OnMenuChange(int menuIndex, int callerMenu) {
-		// TODO
+		// confirm that the caller is the topmost menu
+		if (m_menuStack.Peek() != callerMenu) return;
+
+		// validate index
+		if (menuIndex >= m_menuStack.Count || menuIndex < 0) return;
+
+		// now we change menus
+		m_currentMenu.SetAlpha(0.0f);
+		m_menuStack.Push(menuIndex);
+		m_currentMenu.SetAlpha(0.0f);
 	}
 
 	private void OnExitMenu(int callerMenu) {
@@ -59,6 +68,13 @@ public class MainMenuController : MonoBehaviour {
 	}
 
 	private void UpdateCurrentMenu() {
+		// get input
+		Vector2 p1Direction = m_player1Direction.action.ReadValue<Vector2>();
+		Vector2 p2Direction = m_player2Direction.action.ReadValue<Vector2>();
+		bool p1Confirm = m_player1Confirm.action.WasPressedThisFrame();
+		bool p2Confirm = m_player2Confirm.action.WasPressedThisFrame();
 
+		// call to update current menu
+		m_currentMenu.UpdateMenu(p1Direction, p1Confirm, p2Direction, p2Confirm);
 	}
 }
