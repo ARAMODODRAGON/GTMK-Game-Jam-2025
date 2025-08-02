@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	int player2LivesTotal;
 	[SerializeField]
-	float gameTimer;
+	float roundTime;
 	[SerializeField]
 	float hitStopTime;
 
@@ -21,6 +21,13 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	GameObject player2Prefab;
 
+	[SerializeField]
+	GameObject leftSpikes;
+	Vector2 leftSpikesPos;
+	[SerializeField]
+	GameObject rightSpikes;
+	Vector2 rightSpikesPos;
+
 	PlayerController player1Ref;
 	PlayerController player2Ref;
 
@@ -30,9 +37,14 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	Transform spawnLoc2;
 
-	Timer timer;
+	[SerializeField]
+	Timer respawnTimer;
+	[SerializeField]
+	Timer roundTimer;
 
 	HitStop hitStop;
+
+	bool canDamagePlayers = true;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Awake()
@@ -50,21 +62,29 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		timer = GetComponent<Timer>();
 		hitStop = GetComponent<HitStop>();
 
-		timer.onTimerFinished.AddListener(ResetPlayerPositions);
+		respawnTimer.onTimerFinished.AddListener(ResetPlayerPositions);
+		roundTimer.onTimerFinished.AddListener(MoveSpikes);
+
+		leftSpikesPos = leftSpikes.transform.position;
+		rightSpikesPos = rightSpikes.transform.position;
 
 		SetupGame();
 	}
 
 	public void TakeDamage(PlayerController player_)
 	{
+		
 		if (player_ == null)
 		{
 			Debug.Log("Player ref was null, couldn't assign damage");
 			return;
+		}
 
+		if (canDamagePlayers == false)
+		{
+			return;
 		}
 
 		if (player_.UID == 1)
@@ -88,15 +108,17 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-
+		canDamagePlayers = false;
 
 		player_.gameObject.SetActive(false);
 		StartHitStop();
-		timer.StartTimer(2);
+		respawnTimer.StartTimer(2);
 	}
 
 	void SetupGame()
 	{
+
+
 
 		player1Lives = player1LivesTotal;
 		player2Lives = player2LivesTotal;
@@ -122,15 +144,31 @@ public class GameManager : MonoBehaviour
 
 		player2Ref = spawnedObject.GetComponent<PlayerController>();
 		player2Ref.UID = 2;
+
+		roundTimer.StartTimer(roundTime);
 	}
 
 	void ResetPlayerPositions()
 	{
+		leftSpikes.transform.position = leftSpikesPos;
+		leftSpikes.GetComponent<Mover>().SetDirection(new Vector2(0, 0));
+		rightSpikes.transform.position = rightSpikesPos;
+		rightSpikes.GetComponent<Mover>().SetDirection(new Vector2(0, 0));
+
+
 		player1Ref.transform.position = new Vector2 (spawnLoc1.position.x, spawnLoc1.position.y);
-		player2Ref.transform.position = new Vector2(spawnLoc2.position.x, spawnLoc2.position.y);
+		player2Ref.transform.position = new Vector2 (spawnLoc2.position.x, spawnLoc2.position.y);
 
 		player1Ref.gameObject.SetActive(true);
 		player2Ref.gameObject.SetActive(true);
+
+		canDamagePlayers = true;
+	}
+
+	void MoveSpikes()
+	{
+		leftSpikes.GetComponent<Mover>().SetDirection(new Vector2(1, 0));
+		rightSpikes.GetComponent<Mover>().SetDirection(new Vector2(-1, 0));
 	}
 
 	public void StartHitStop()

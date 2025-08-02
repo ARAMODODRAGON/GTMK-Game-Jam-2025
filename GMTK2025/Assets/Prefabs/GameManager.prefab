@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6090911395895343965}
   - component: {fileID: 1473995826697392414}
   - component: {fileID: 5139244084654121618}
+  - component: {fileID: 33825789477166211}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,11 +49,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1LivesTotal: 3
   player2LivesTotal: 3
-  gameTimer: 0
+  roundTime: 5
+  hitStopTime: 0
   player1Prefab: {fileID: 5874593570251077712, guid: 3d7811109c2bca645b4f957ad9fb8fb0, type: 3}
   player2Prefab: {fileID: 7693438355736191387, guid: 2cdff4b03da9c664daca603c4ef4b188, type: 3}
+  leftSpikes: {fileID: 0}
+  rightSpikes: {fileID: 0}
   spawnLoc1: {fileID: 0}
   spawnLoc2: {fileID: 0}
+  respawnTimer: {fileID: 1473995826697392414}
+  roundTimer: {fileID: 33825789477166211}
 --- !u!114 &1473995826697392414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,3 +92,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa59bd1f8e7d54d837b8c4b2461055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &33825789477166211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382336848028604302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931e4aa1b3c0b8c47ab17a4ce17e71f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLooping: 0
+  totalTime: 0
+  currentTime: 0
+  onTimerFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  onTimerUpdated:
+    m_PersistentCalls:
+      m_Calls: []

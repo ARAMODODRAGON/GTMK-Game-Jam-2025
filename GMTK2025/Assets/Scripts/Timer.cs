@@ -45,11 +45,6 @@ public class Timer : MonoBehaviour
 	public void StartTimer(float time_)
 	{
 		//Core assumption with this class is that we only fire the events once and then the object needs to subscribe again, unless we've specified looping.
-		//if (isLooping == false)
-		//{
-		//	onTimerFinished.RemoveAllListeners();
-		//	onTimerUpdated.RemoveAllListeners();
-		//}
 		totalTime = time_;
 		currentTime = time_;
 		isRunning = true;
