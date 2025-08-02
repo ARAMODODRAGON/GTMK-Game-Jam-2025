@@ -19,7 +19,7 @@ public class ControlsDisplayHandler : BaseMenuScreen {
 
 	public override void UpdateMenu(Vector2 p1Direction, bool p1Confirm, Vector2 p2Direction, bool p2Confirm) {
 		if (p1Confirm || p2Confirm) {
-			AudioManager.instance.PlaySound(AudioManager.instance.uiConfirm, transform.position, 1.0f, 0.0f, false);
+			AudioManager.instance.PlaySound(AudioManager.instance.uiConfirm, transform.position, 0.5f, 0.0f, false);
 			exitMenu.Invoke();
 		}
 	}
