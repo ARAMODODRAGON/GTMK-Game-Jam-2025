@@ -59,6 +59,7 @@ MonoBehaviour:
   spawnLoc2: {fileID: 0}
   respawnTimer: {fileID: 1473995826697392414}
   roundTimer: {fileID: 33825789477166211}
+  mainCamera: {fileID: 0}
 --- !u!114 &1473995826697392414
 MonoBehaviour:
   m_ObjectHideFlags: 0
