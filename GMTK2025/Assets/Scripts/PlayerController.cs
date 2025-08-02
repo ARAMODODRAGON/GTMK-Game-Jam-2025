@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Splines;
 
 
 public interface IDamageable
@@ -43,17 +41,15 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	public int UID;
 
 	// used to get components
-	private void Awake() {
+	private void Awake() 
+	{
 		m_rigidbody = GetComponent<Rigidbody2D>();
 		m_boxCollider = GetComponent<BoxCollider2D>();
-
-		//if (m_ball != null) {
-		//	m_spline = m_ball.gameObject.GetComponent<SplineAnimate>();
-		//}
 	}
 
 	// initialization
-	private void Start() {
+	private void Start() 
+	{
 		if (m_stats == null) {
 			enabled = false;
 			Debug.LogError("stats was not set on player \"" + name + "\"");
@@ -62,7 +58,8 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	}
 
 	// update is called once per frame
-	void Update() {
+	void Update() 
+	{
 		// send input to ball
 		if (damageAction.action.WasPressedThisFrame()) {
 			m_ball.StopBall();
@@ -70,7 +67,8 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	}
 
 	// used to handle physics
-	void FixedUpdate() {
+	void FixedUpdate() 
+	{
 		if (!m_stats) return; // just make sure we can actually update physics lol
 
 		// get our input
@@ -86,7 +84,8 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		m_lastjumpinput = _inputJump;
 	}
 
-	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputJumpHeld, bool inputPressedJump) {
+	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputJumpHeld, bool inputPressedJump) 
+	{
 		// get velocity
 		Vector2 _velocity = m_rigidbody.linearVelocity;
 
@@ -106,12 +105,15 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		float _targetFallAcceleration = m_stats.fallAcceleration * _targetFallMultiplier;
 		float _targetMaxFallSpeed = m_stats.maxFallSpeed;
 
-		if (!m_touchingGround && (_velocity.y < Util.very_small)) {
-			if ((inputDirection.x < 0.0f) && m_touchingLeftWall) {
+		if (!m_touchingGround && (_velocity.y < Util.very_small)) 
+		{
+			if ((inputDirection.x < 0.0f) && m_touchingLeftWall) 
+			{
 				_targetMaxFallSpeed = m_stats.maxSlideSpeed;
 				_targetFallAcceleration = m_stats.slideAcceleration;
 			}
-			if ((inputDirection.x > 0.0f) && m_touchingRightWall) {
+			if ((inputDirection.x > 0.0f) && m_touchingRightWall) 
+			{
 				_targetMaxFallSpeed = m_stats.maxSlideSpeed;
 				_targetFallAcceleration = m_stats.slideAcceleration;
 			}
@@ -123,11 +125,13 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		// handle jump
 
 		// touching ground
-		if (inputPressedJump && m_touchingGround) {
+		if (inputPressedJump && m_touchingGround) 
+		{
 			_velocity.y = m_stats.jumpInitialSpeed;
 		}
 		// else touching either wall (using != garuntees its one *or* the other)
-		else if (inputPressedJump && (m_touchingLeftWall != m_touchingRightWall)) {
+		else if (inputPressedJump && (m_touchingLeftWall != m_touchingRightWall)) 
+		{
 			float direction = (m_touchingLeftWall ? 1.0f : -1.0f);
 
 			_velocity.y = m_stats.wallJumpInitialSpeed;
@@ -141,13 +145,15 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	// wasnt sure what to name this lol
 
 	//Fixed it
-	void SurfaceCheck() {
+	void SurfaceCheck() 
+	{
 		m_touchingGround = IsTouchingSurface(Vector2.down);
 		m_touchingLeftWall = IsTouchingSurface(Vector2.left);
 		m_touchingRightWall = IsTouchingSurface(Vector2.right);
 	}
 
-	bool IsTouchingSurface(Vector2 direction) {
+	bool IsTouchingSurface(Vector2 direction) 
+	{
 		RaycastHit2D _hit = Physics2D.BoxCast(
 			m_boxCollider.bounds.center,
 			m_boxCollider.bounds.size,
@@ -164,34 +170,19 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	{
 		// Filler function for now, will add proper damage logic later.
 
-		Debug.Log("Damage Taken");
-
 		GameManager.instance.TakeDamage(this);
 	}
 
-	//bool CheckGround() {
-	//	RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundCheckDistance, groundLayer);
-	//
-	//	Color colour;
-	//
-	//	if (hit.collider != null) {
-	//		colour = Color.green;
-	//		Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
-	//		Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
-	//		Debug.DrawRay(boxCollider.bounds.center - new Vector3(0, boxCollider.bounds.extents.y), Vector2.right * (boxCollider.bounds.extents.x), colour);
-	//
-	//		return true;
-	//	} else {
-	//		colour = Color.red;
-	//	}
-	//
-	//	Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
-	//	Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundCheckDistance), colour);
-	//	Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y + groundCheckDistance), Vector2.right * (boxCollider.bounds.extents.x), colour);
-	//
-	//
-	//	return false;
-	//}
+	private void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col != null)
+		{
+			if (col.CompareTag("Spikes"))
+			{
+				OnTakeDamage();
+			}
+		}
+	}
 
 
 }

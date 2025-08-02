@@ -7,8 +7,6 @@ public class BallController : MonoBehaviour
 	float ballStopTime;
 	[SerializeField]
 	bool shouldBallDamageFor1Frame;
-	[SerializeField]
-	float hitStopTime;
 	bool canDamage = false;
 
 	float currentTimer;
@@ -19,8 +17,6 @@ public class BallController : MonoBehaviour
 
 	SpriteRenderer spriteRenderer;
 
-	HitStop hitStop;
-
 	Timer timer;
 
 	private void Start()
@@ -28,7 +24,6 @@ public class BallController : MonoBehaviour
 		spline = GetComponent<SplineAnimate>();
 		circleCollider = GetComponent<CircleCollider2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		hitStop = GetComponent<HitStop>();
 		timer = GetComponent<Timer>();
 
 		circleCollider.enabled = false;
@@ -78,7 +73,6 @@ public class BallController : MonoBehaviour
 		if (damageable != null)
 		{
 			damageable.OnTakeDamage();
-			hitStop.StartHitStop(hitStopTime);
 		}
 	}
 
