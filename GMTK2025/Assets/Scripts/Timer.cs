@@ -15,8 +15,8 @@ public class Timer : MonoBehaviour
 
 	//Events
 	[Header("Events")]
-	public UnityEvent onTimerFinished;
-	public UnityEvent<float> onTimerUpdated;
+	public UnityEvent onTimerFinished = new UnityEvent();
+	public UnityEvent<float> onTimerUpdated = new UnityEvent<float>();
 
 	//Private Variables
 	bool isRunning = false;

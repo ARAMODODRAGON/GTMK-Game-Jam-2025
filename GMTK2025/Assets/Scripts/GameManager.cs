@@ -1,6 +1,7 @@
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameManager : MonoBehaviour
 {
@@ -68,6 +69,8 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
+		EventBus.gameEnd.AddListener(GameEnd);
+
 		hitStop = GetComponent<HitStop>();
 		screenShake = mainCamera.GetComponent<ScreenShake>();
 
@@ -99,9 +102,10 @@ public class GameManager : MonoBehaviour
 			player1LivesTotal--;
 			EventBus.updatePlayerHealth.Invoke(player_.UID, player1LivesTotal);
 
-			if (player2LivesTotal <= 0)
+			if (player1LivesTotal <= 0)
 			{
-				EventBus.gameEnd.Invoke();
+				EventBus.announceWinner.Invoke(player_.UID);
+				roundTimer.StopTimer();
 			}
 		}
 		else
@@ -111,7 +115,8 @@ public class GameManager : MonoBehaviour
 
 			if (player2LivesTotal <= 0)
 			{
-				EventBus.gameEnd.Invoke();
+				EventBus.announceWinner.Invoke(player_.UID);
+				roundTimer.StopTimer();
 			}
 		}
 
@@ -119,7 +124,8 @@ public class GameManager : MonoBehaviour
 
 		player_.gameObject.SetActive(false);
 		StartHitStop();
-		respawnTimer.StartTimer(2);
+		if (player1LivesTotal <= 0 || player2LivesTotal <= 0) return;
+		respawnTimer.StartTimer(2); // only respawn if the game is not over
 	}
 
 	private void GameEnd() 
@@ -129,8 +135,6 @@ public class GameManager : MonoBehaviour
 
 	void SetupGame()
 	{
-
-
 
 		player1Lives = player1LivesTotal;
 		player2Lives = player2LivesTotal;
@@ -147,6 +151,8 @@ public class GameManager : MonoBehaviour
 		player1Ref = spawnedObject.GetComponent<PlayerController>();
 		player1Ref.UID = 1;
 
+		EventBus.updatePlayerHealth.Invoke(player1Ref.UID, player1Lives);
+
 		spawnedObject = Instantiate(player2Prefab.gameObject, spawnLoc2.position, spawnLoc2.rotation);
 		if (spawnedObject == null)
 		{
@@ -157,7 +163,10 @@ public class GameManager : MonoBehaviour
 		player2Ref = spawnedObject.GetComponent<PlayerController>();
 		player2Ref.UID = 2;
 
+		EventBus.updatePlayerHealth.Invoke(player2Ref.UID, player2Lives);
+
 		roundTimer.StartTimer(roundTime);
+		roundTimer.onTimerUpdated.AddListener(EventBus.updateGameTimer.Invoke);
 	}
 
 	void ResetPlayerPositions()
