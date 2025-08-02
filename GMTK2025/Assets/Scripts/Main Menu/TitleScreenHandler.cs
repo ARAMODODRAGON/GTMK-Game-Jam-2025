@@ -72,6 +72,7 @@ public class TitleScreenHandler : BaseMenuScreen {
 
 		// confirm option
 		if (combineConfirm) {
+			AudioManager.instance.PlaySound(AudioManager.instance.uiConfirm, transform.position, 1.0f, 0.0f, false);
 			// this is to quit
 			if (m_menuOptions[m_optionIndex].nextMenuIndex == -1) {
 				Application.Quit();
@@ -97,7 +98,7 @@ public class TitleScreenHandler : BaseMenuScreen {
 		if (lastOptionIndex != m_optionIndex) {
 			// reset timer
 			m_scrollDelayTimer = m_scrollDelay;
-
+			AudioManager.instance.PlaySound(AudioManager.instance.uiScroll, transform.position, 1.0f, 0.0f, false);
 			// wrap
 			if (m_optionIndex < 0) m_optionIndex += m_menuOptions.Count;
 			if (m_optionIndex >= m_menuOptions.Count) m_optionIndex -= m_menuOptions.Count;

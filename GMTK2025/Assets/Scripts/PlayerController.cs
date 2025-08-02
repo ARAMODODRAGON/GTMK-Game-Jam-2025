@@ -137,11 +137,14 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		// touching ground
 		if (inputPressedJump && m_touchingGround) 
 		{
+			AudioManager.instance.PlaySound(AudioManager.instance.jumpSound, transform.position, 1.0f, 0.0f, false);
 			_velocity.y = m_stats.jumpInitialSpeed;
 		}
 		// else touching either wall (using != garuntees its one *or* the other)
 		else if (inputPressedJump && (m_touchingLeftWall != m_touchingRightWall)) 
 		{
+
+			AudioManager.instance.PlaySound(AudioManager.instance.jumpSound, transform.position, 1.0f, 0.0f, false);
 			float direction = (m_touchingLeftWall ? 1.0f : -1.0f);
 
 			_velocity.y = m_stats.wallJumpInitialSpeed;
@@ -179,9 +182,10 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	public void OnTakeDamage()
 	{
 		// Filler function for now, will add proper damage logic later.
-
+		AudioManager.instance.PlaySound(AudioManager.instance.damageSound, transform.position, 1.0f, 1.0f, false);
 		GameManager.instance.TakeDamage(this);
 		GameManager.instance.ScreenShake();
+
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)
