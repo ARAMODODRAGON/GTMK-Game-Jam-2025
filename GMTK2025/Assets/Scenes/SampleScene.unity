@@ -219,6 +219,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1557816671660899360, guid: 3d7811109c2bca645b4f957ad9fb8fb0, type: 3}
+      propertyPath: shouldBallDamageFor1Frame
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1715203862463763384, guid: 3d7811109c2bca645b4f957ad9fb8fb0, type: 3}
       propertyPath: m_TagString
       value: Damageable
@@ -536,7 +540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8887210459747253833, guid: 3d7811109c2bca645b4f957ad9fb8fb0, type: 3}
       propertyPath: shouldBallDamageFor1Frame
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
