@@ -147,8 +147,10 @@ MonoBehaviour:
   moveSpeed: 200
   rotationScale: 1
   ballFlipTimer: 0.5
-  attackSpinSpeed: 30
-  regularSpinSpeed: 300
+  attackSpinSpeed: 10000
+  regularSpinSpeed: 1000
+  opacityWhenSpinning: 0.2
+  attackScalar: 1.7
 --- !u!114 &109987551892582036
 MonoBehaviour:
   m_ObjectHideFlags: 0

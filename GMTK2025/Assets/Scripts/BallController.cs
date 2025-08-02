@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Splines;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class BallController : MonoBehaviour
 {
@@ -36,10 +37,10 @@ public class BallController : MonoBehaviour
 	private float attackSpinSpeed;
 	[SerializeField]
 	private float regularSpinSpeed;
-
-	private float rotationSpeed = 1.0f;
-
-	private float rotationalVelocity = 0.0f;
+	[SerializeField]
+	private float opacityWhenSpinning;
+	[SerializeField]
+	private float attackScalar;
 
 	private void Start()
 	{
@@ -56,7 +57,7 @@ public class BallController : MonoBehaviour
 		canRotate = true;
 		canFlip = true;
 
-		rotationSpeed = regularSpinSpeed;
+		spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, opacityWhenSpinning);
 	}
 
 	private void FixedUpdate()
@@ -76,9 +77,10 @@ public class BallController : MonoBehaviour
 		{
 			AudioManager.instance.PlaySound(AudioManager.instance.attackSound, transform.position, 0.3f, 0.5f, false);
 
+			spriteRenderer.color = Color.white;
+			transform.localScale = new Vector3(attackScalar, attackScalar, attackScalar);
 			canDamage = true;
 			//spriteRenderer.color = Color.red;
-			rotationSpeed = attackSpinSpeed;
 			currentTimer = ballStopTime;
 			isRunningTimer = true;
 			canRotate = false;
@@ -101,7 +103,6 @@ public class BallController : MonoBehaviour
 		circleCollider.enabled = false;
 		canDamage = false;
 		canRotate = true;
-		rotationSpeed = regularSpinSpeed;
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)
@@ -120,7 +121,8 @@ public class BallController : MonoBehaviour
 
 	private void DisableBallDamage()
 	{
-		//spriteRenderer.color = Color.lightBlue;
+		spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, opacityWhenSpinning);
+		transform.localScale = Vector3.one;
 		canDamage = false;
 	}
 
@@ -155,8 +157,10 @@ public class BallController : MonoBehaviour
 	private void LateUpdate() 
 	{
 		Vector3 euler = transform.eulerAngles;
-		rotationalVelocity = Util.MoveToward(rotationalVelocity, rotationScale * rotationSpeed, Time.deltaTime);
-		euler.z += rotationalVelocity * Time.deltaTime;
+		float targetSpinSpeed = regularSpinSpeed;
+		if (!canRotate) targetSpinSpeed = attackSpinSpeed;
+		euler.z += targetSpinSpeed * rotationScale * Time.deltaTime;
 		transform.eulerAngles = euler;
+
 	}
 }
