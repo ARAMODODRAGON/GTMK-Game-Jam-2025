@@ -13,4 +13,7 @@ public static class EventBus {
 	// called to update the timer in the UI
 	public static UnityEvent<float> updateGameTimer = new UnityEvent<float>();
 
+	// called when the battle is done to announce the winner
+	public static UnityEvent<int> announceWinner = new UnityEvent<int>();
+
 }

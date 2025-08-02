@@ -136,9 +136,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
+        y: 48
         width: 80
-        height: 22
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,9 +158,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 10
+        y: 48
         width: 80
-        height: 22
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: BattleUI_2
       rect:
         serializedVersion: 2
-        x: 192
-        y: 4
-        width: 128
-        height: 28
+        x: 208
+        y: 44
+        width: 96
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,6 +193,28 @@ TextureImporter:
       bones: []
       spriteID: a5009d166a17a58c0800000000000000
       internalID: -4009767558799884198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleUI_3
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 12
+        width: 96
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a5c47081f2ebc341b4e61590afd880b
+      internalID: 1400109596
       vertices: []
       indices: 
       edges: []
@@ -216,6 +238,7 @@ TextureImporter:
       BattleUI_0: 5180914577296143793
       BattleUI_1: -1081509616043281280
       BattleUI_2: -4009767558799884198
+      BattleUI_3: 1400109596
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
