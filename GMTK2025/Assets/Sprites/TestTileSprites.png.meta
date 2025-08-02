@@ -173,8 +173,8 @@ TextureImporter:
       name: TestTileSprites_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -195,8 +195,8 @@ TextureImporter:
       name: TestTileSprites_3
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -209,6 +209,94 @@ TextureImporter:
       bones: []
       spriteID: e89752b4682293c4898cd88ca818bf86
       internalID: -1557711422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestTileSprites_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f2f80f718f72b940bbecf5bbd8a73d4
+      internalID: 1768386383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestTileSprites_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 563ea63f8e1b0444a94b97fb328c26f2
+      internalID: -418088384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestTileSprites_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f701afe28b855946a3f9c83c1fcc97e
+      internalID: -2101851350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestTileSprites_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b38cf1de6711b84687d026a04e56e2a
+      internalID: -2047651432
       vertices: []
       indices: 
       edges: []
@@ -233,6 +321,10 @@ TextureImporter:
       TestTileSprites_1: 769179306
       TestTileSprites_2: -1628925978
       TestTileSprites_3: -1557711422
+      TestTileSprites_4: 1768386383
+      TestTileSprites_5: -418088384
+      TestTileSprites_6: -2101851350
+      TestTileSprites_7: -2047651432
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
