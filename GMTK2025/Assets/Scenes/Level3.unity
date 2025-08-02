@@ -3511,7 +3511,7 @@ PrefabInstance:
       objectReference: {fileID: 137344068}
     - target: {fileID: 6090911395895343965, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
       propertyPath: hitStopTime
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6090911395895343965, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
       propertyPath: rightSpikes

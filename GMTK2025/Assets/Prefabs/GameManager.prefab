@@ -50,7 +50,7 @@ MonoBehaviour:
   player1LivesTotal: 3
   player2LivesTotal: 3
   roundTime: 30
-  hitStopTime: 0
+  hitStopTime: 0.2
   player1Prefab: {fileID: 5874593570251077712, guid: 3d7811109c2bca645b4f957ad9fb8fb0, type: 3}
   player2Prefab: {fileID: 7693438355736191387, guid: 2cdff4b03da9c664daca603c4ef4b188, type: 3}
   leftSpikes: {fileID: 0}
