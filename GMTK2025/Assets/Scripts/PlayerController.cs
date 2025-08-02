@@ -181,6 +181,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		// Filler function for now, will add proper damage logic later.
 
 		GameManager.instance.TakeDamage(this);
+		GameManager.instance.ScreenShake();
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)

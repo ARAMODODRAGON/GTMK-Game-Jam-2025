@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
 
 	bool canDamagePlayers = true;
 
+	[SerializeField]
+	GameObject mainCamera;
+	ScreenShake screenShake;
+
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Awake()
 	{
@@ -65,6 +69,7 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		hitStop = GetComponent<HitStop>();
+		screenShake = mainCamera.GetComponent<ScreenShake>();
 
 		respawnTimer.onTimerFinished.AddListener(ResetPlayerPositions);
 		roundTimer.onTimerFinished.AddListener(MoveSpikes);
@@ -183,6 +188,11 @@ public class GameManager : MonoBehaviour
 	public void StartHitStop()
 	{
 		hitStop.StartHitStop(hitStopTime);
+	}
+
+	public void ScreenShake()
+	{
+		screenShake.StartScreenShake(mainCamera);
 	}
 
 	// Update is called once per frame
