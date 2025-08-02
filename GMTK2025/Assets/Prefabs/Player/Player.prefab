@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8887210459747253833}
   - component: {fileID: 109987551892582036}
   - component: {fileID: 1736035190185449267}
+  - component: {fileID: 6427419052849533589}
   m_Layer: 8
   m_Name: Ball
   m_TagString: Damageable
@@ -165,8 +166,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballStopTime: 1
   shouldBallDamageFor1Frame: 1
+  ballDamageWindowTimer: {fileID: 109987551892582036}
+  ballFlipWindowTimer: {fileID: 6427419052849533589}
   moveSpeed: 200
   rotationScale: 1
+  ballFlipTimer: 0.5
 --- !u!114 &109987551892582036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +219,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6427419052849533589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715203862463763384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931e4aa1b3c0b8c47ab17a4ce17e71f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLooping: 0
+  totalTime: 0
+  currentTime: 0
+  onTimerFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  onTimerUpdated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5874593570251077712
 GameObject:
   m_ObjectHideFlags: 0
