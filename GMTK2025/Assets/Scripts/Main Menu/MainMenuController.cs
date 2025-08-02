@@ -29,9 +29,10 @@ public class MainMenuController : MonoBehaviour {
 		// initialize menus
 		for (int i = 0; i < m_menus.Count; i++) {
 			// bind to OnMenuChange so that it knows which menu called it
-			m_menus[i].changeMenu.AddListener((int menuIndex) => OnMenuChange(menuIndex, i));
+			int _indexlocalcopy = i;
+			m_menus[i].changeMenu.AddListener((int menuIndex) => OnMenuChange(menuIndex, _indexlocalcopy));
 			// bind to OnExitMenu
-			m_menus[i].exitMenu.AddListener(() => OnExitMenu(i));
+			m_menus[i].exitMenu.AddListener(() => OnExitMenu(_indexlocalcopy));
 			// make invisible
 			m_menus[i].HideMenu();
 		}
@@ -50,8 +51,11 @@ public class MainMenuController : MonoBehaviour {
 		// confirm that the caller is the topmost menu
 		if (m_menuStack.Peek() != callerMenu) return;
 
+		// confirm we arent opening the same menu
+		if (menuIndex == callerMenu) return;
+
 		// validate index
-		if (menuIndex >= m_menuStack.Count || menuIndex < 0) return;
+		if (menuIndex >= m_menus.Count || menuIndex < 0) return;
 
 		// now we change menus
 		m_currentMenu.HideMenu();
@@ -60,7 +64,16 @@ public class MainMenuController : MonoBehaviour {
 	}
 
 	private void OnExitMenu(int callerMenu) {
-		// TODO
+		// confirm that the caller is the topmost menu
+		if (m_menuStack.Peek() != callerMenu) return;
+
+		// we cant exit if there are no other menus on the stack
+		if (m_menuStack.Count == 1) return;
+
+		// now we change menus
+		m_currentMenu.HideMenu();
+		m_menuStack.Pop();
+		m_currentMenu.OpenMenu();
 	}
 
 	private void Update() {

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: cf2650ede380c7b4aaa19c2dce12e93c
+guid: 43162b7885b239f4da3cd3e69b663a7f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4404137418682088219
-    second: TitleScreen_ControlsHint_0
-  - first:
-      213: -6341754898483707364
-    second: TitleScreen_ControlsHint_1
+      213: -3681147430577761962
+    second: LevelSelect_Options_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TitleScreen_ControlsHint_0
+      name: LevelSelect_Options_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 49
-        height: 32
+        y: 64
+        width: 80
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,30 +141,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b1b3d8ee5a3ae1d30800000000000000
-      internalID: 4404137418682088219
+      spriteID: 651129a5aefe9ecc0800000000000000
+      internalID: -3681147430577761962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TitleScreen_ControlsHint_1
+      name: LevelSelect_Options_1
       rect:
         serializedVersion: 2
-        x: 63
-        y: 0
-        width: 49
-        height: 32
+        x: 0
+        y: 48
+        width: 80
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c120947158f8df7a0800000000000000
-      internalID: -6341754898483707364
+      spriteID: b2219c6648b355345b907a859c57c906
+      internalID: 1234028955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelSelect_Options_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ae14b034da32644b949622722dcc256
+      internalID: 176384508
       vertices: []
       indices: 
       edges: []
@@ -176,7 +195,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f33ab90f42e5da440a0ede8509aaaa0a
     internalID: 0
     vertices: []
     indices: 
@@ -184,10 +203,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":80.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      TitleScreen_ControlsHint_0: 4404137418682088219
-      TitleScreen_ControlsHint_1: -6341754898483707364
+      LevelSelect_Options_0: -3681147430577761962
+      LevelSelect_Options_1: 1234028955
+      LevelSelect_Options_2: 176384508
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

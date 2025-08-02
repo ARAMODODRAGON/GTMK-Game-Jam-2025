@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: cf2650ede380c7b4aaa19c2dce12e93c
+guid: 6f6c17e26a304da45b2a47f01f9c77fd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4404137418682088219
-    second: TitleScreen_ControlsHint_0
-  - first:
-      213: -6341754898483707364
-    second: TitleScreen_ControlsHint_1
+      213: -1955448553306655712
+    second: Background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,13 +40,13 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -129,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TitleScreen_ControlsHint_0
+      name: Background_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 49
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,30 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b1b3d8ee5a3ae1d30800000000000000
-      internalID: 4404137418682088219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TitleScreen_ControlsHint_1
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 0
-        width: 49
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c120947158f8df7a0800000000000000
-      internalID: -6341754898483707364
+      spriteID: 024fa93b6e9dcd4e0800000000000000
+      internalID: -1955448553306655712
       vertices: []
       indices: 
       edges: []
@@ -176,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -186,8 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TitleScreen_ControlsHint_0: 4404137418682088219
-      TitleScreen_ControlsHint_1: -6341754898483707364
+      Background_0: -1955448553306655712
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

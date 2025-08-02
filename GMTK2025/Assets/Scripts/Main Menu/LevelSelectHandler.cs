@@ -1,20 +1,10 @@
-using System;
 using System.Collections.Generic;
-using UnityEditor;
+using System;
 using UnityEngine;
 
-public class TitleScreenHandler : BaseMenuScreen {
+public class LevelSelectHandler : BaseMenuScreen {
 
-	// struct to represent a menu option and where it goes
-	[Serializable]
-	private struct MenuOption {
-		public int nextMenuIndex; // assuming -1 means quit here
-		public RectTransform transform;
-	}
-
-	// references to menu options
-	[SerializeField] private List<MenuOption> m_menuOptions;
-
+	
 	// components
 	private CanvasGroup m_group;
 
@@ -22,6 +12,16 @@ public class TitleScreenHandler : BaseMenuScreen {
 	[SerializeField] private float m_scaleIncrease;
 	[SerializeField] private float m_scaleSpeed;
 	[SerializeField] private float m_scrollDelay;
+	
+	// struct to represent a menu option and where it goes
+	[Serializable]
+	private struct MenuOption {
+		public int loadLevelIndex; // -1 means return here
+		public RectTransform transform;
+	}
+
+	// references to menu options
+	[SerializeField] private List<MenuOption> m_menuOptions;
 
 	// variables
 	private int m_optionIndex = 0;
@@ -30,19 +30,8 @@ public class TitleScreenHandler : BaseMenuScreen {
 	private void Awake() {
 		m_group = GetComponent<CanvasGroup>();
 		m_group.alpha = 0.0f;
-
-		// simple way to remove the quit menu option
-		if (Application.platform == RuntimePlatform.WebGLPlayer) {
-			foreach (var option in m_menuOptions) {
-				if (option.nextMenuIndex == -1) {
-					m_menuOptions.Remove(option);
-					option.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f); // hide it basically
-					return;
-				}
-			}
-		}
 	}
-
+	
 	public override void OpenMenu() {
 		m_group.alpha = 1.0f;
 	}
@@ -73,17 +62,15 @@ public class TitleScreenHandler : BaseMenuScreen {
 		// confirm option
 		if (combineConfirm) {
 			// this is to quit
-			if (m_menuOptions[m_optionIndex].nextMenuIndex == -1) {
-				Application.Quit();
+			if (m_menuOptions[m_optionIndex].loadLevelIndex == -1) {
+				exitMenu.Invoke();
 				return;
 			}
 
-			// otherwise we do this
-			changeMenu.Invoke(m_menuOptions[m_optionIndex].nextMenuIndex);
-
+			// load level
 		}
 	}
-
+	
 	private void UpdateOptions(bool upInput, bool downInput) {
 		if (m_scrollDelayTimer > 0.0f) return;
 
