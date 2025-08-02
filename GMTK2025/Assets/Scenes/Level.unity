@@ -4216,32 +4216,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &988781591 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8382336848028604302, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
-  m_PrefabInstance: {fileID: 1975550339988480871}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &988781596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988781591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931e4aa1b3c0b8c47ab17a4ce17e71f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isLooping: 0
-  totalTime: 0
-  currentTime: 0
-  onTimerFinished:
-    m_PersistentCalls:
-      m_Calls: []
-  onTimerUpdated:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1269555315
 GameObject:
   m_ObjectHideFlags: 0
@@ -4361,9 +4335,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 33825789477166211, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1473995826697392414, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6090911395895343965, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
       propertyPath: roundTime
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6090911395895343965, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
       propertyPath: spawnLoc1
@@ -4432,10 +4414,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8382336848028604302, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 988781596}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
