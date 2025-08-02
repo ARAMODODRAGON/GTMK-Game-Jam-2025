@@ -32,6 +32,14 @@ public class BallController : MonoBehaviour
 	bool canFlip;
 	[SerializeField]
 	float ballFlipTimer;
+	[SerializeField]
+	private float attackSpinSpeed;
+	[SerializeField]
+	private float regularSpinSpeed;
+
+	private float rotationSpeed = 1.0f;
+
+	private float rotationalVelocity = 0.0f;
 
 	private void Start()
 	{
@@ -44,9 +52,11 @@ public class BallController : MonoBehaviour
 		ballDamageWindowTimer.onTimerFinished.AddListener(DisableBallDamage);
 		ballFlipWindowTimer.onTimerFinished.AddListener(ResetFlipWindow);
 
-		spriteRenderer.color = Color.blue;
+		//spriteRenderer.color = Color.blue;
 		canRotate = true;
 		canFlip = true;
+
+		rotationSpeed = regularSpinSpeed;
 	}
 
 	private void FixedUpdate()
@@ -67,7 +77,8 @@ public class BallController : MonoBehaviour
 			AudioManager.instance.PlaySound(AudioManager.instance.attackSound, transform.position, 0.3f, 0.5f, false);
 
 			canDamage = true;
-			spriteRenderer.color = Color.red;
+			//spriteRenderer.color = Color.red;
+			rotationSpeed = attackSpinSpeed;
 			currentTimer = ballStopTime;
 			isRunningTimer = true;
 			canRotate = false;
@@ -85,12 +96,12 @@ public class BallController : MonoBehaviour
 	{
 		//Debug.Log("Start Ball");
 
-		spriteRenderer.color = Color.blue;
+		//spriteRenderer.color = Color.blue;
 		isRunningTimer = false;
 		circleCollider.enabled = false;
-		spline.Play();
 		canDamage = false;
 		canRotate = true;
+		rotationSpeed = regularSpinSpeed;
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)
@@ -109,7 +120,7 @@ public class BallController : MonoBehaviour
 
 	private void DisableBallDamage()
 	{
-		spriteRenderer.color = Color.lightBlue;
+		//spriteRenderer.color = Color.lightBlue;
 		canDamage = false;
 	}
 
@@ -139,5 +150,13 @@ public class BallController : MonoBehaviour
 				StartBall();
 			}
 		}
+	}
+
+	private void LateUpdate() 
+	{
+		Vector3 euler = transform.eulerAngles;
+		rotationalVelocity = Util.MoveToward(rotationalVelocity, rotationScale * rotationSpeed, Time.deltaTime);
+		euler.z += rotationalVelocity * Time.deltaTime;
+		transform.eulerAngles = euler;
 	}
 }
