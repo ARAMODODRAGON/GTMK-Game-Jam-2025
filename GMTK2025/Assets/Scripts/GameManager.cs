@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 	int player2LivesTotal;
 	[SerializeField]
 	float gameTimer;
+	[SerializeField]
+	float hitStopTime;
 
 	int player1Lives;
 	int player2Lives;
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
 
 	Timer timer;
 
+	HitStop hitStop;
+
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Awake()
 	{
@@ -47,6 +51,8 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		timer = GetComponent<Timer>();
+		hitStop = GetComponent<HitStop>();
+
 		timer.onTimerFinished.AddListener(ResetPlayerPositions);
 
 		SetupGame();
@@ -82,7 +88,10 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
+
+
 		player_.gameObject.SetActive(false);
+		StartHitStop();
 		timer.StartTimer(2);
 	}
 
@@ -122,6 +131,11 @@ public class GameManager : MonoBehaviour
 
 		player1Ref.gameObject.SetActive(true);
 		player2Ref.gameObject.SetActive(true);
+	}
+
+	public void StartHitStop()
+	{
+		hitStop.StartHitStop(hitStopTime);
 	}
 
 	// Update is called once per frame
