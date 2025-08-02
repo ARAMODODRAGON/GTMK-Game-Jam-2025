@@ -37,12 +37,12 @@ public class BallController : MonoBehaviour
 	{
 		if (!isRunningTimer)
 		{
+			canDamage = true;
 			spriteRenderer.color = Color.red;
 			currentTimer = ballStopTime;
 			isRunningTimer = true;
 			spline.Pause();
 			circleCollider.enabled = true;
-			canDamage = true;
 		}
 
 	}
@@ -56,6 +56,21 @@ public class BallController : MonoBehaviour
 		circleCollider.enabled = false;
 		spline.Play();
 		canDamage = false;
+	}
+
+	private void OnTriggerEnter2D(Collider2D col)
+	{
+		if (canDamage == false || col == this)
+		{
+			return;
+		}
+
+		IDamageable damageable = col.gameObject.GetComponent<IDamageable>();
+		if (damageable != null)
+		{
+			damageable.OnTakeDamage();
+			hitStop.StartHitStop(hitStopTime);
+		}
 	}
 
 	void Update()
@@ -73,21 +88,6 @@ public class BallController : MonoBehaviour
 			{
 				canDamage = false;
 			}
-		}
-	}
-
-	private void OnTriggerEnter2D(Collider2D col)
-	{
-		if (canDamage == false || col == this)
-		{
-			return;
-		}
-
-		IDamageable damageable = col.gameObject.GetComponent<IDamageable>();
-		if (damageable != null)
-		{
-			damageable.OnTakeDamage();
-			hitStop.StartHitStop(hitStopTime);
 		}
 	}
 }
