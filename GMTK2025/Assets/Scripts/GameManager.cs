@@ -1,4 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -90,21 +92,21 @@ public class GameManager : MonoBehaviour
 		if (player_.UID == 1)
 		{
 			player1LivesTotal--;
-			Debug.Log("Player 1 health dropped");
+			EventBus.updatePlayerHealth.Invoke(player_.UID, player1LivesTotal);
 
 			if (player2LivesTotal <= 0)
 			{
-				Debug.Log("Game End");
+				EventBus.gameEnd.Invoke();
 			}
 		}
 		else
 		{
 			player2LivesTotal--;
-			Debug.Log("Player 2 health dropped");
+			EventBus.updatePlayerHealth.Invoke(player_.UID, player2LivesTotal);
 
 			if (player2LivesTotal <= 0)
 			{
-				Debug.Log("Game End");
+				EventBus.gameEnd.Invoke();
 			}
 		}
 
@@ -113,6 +115,11 @@ public class GameManager : MonoBehaviour
 		player_.gameObject.SetActive(false);
 		StartHitStop();
 		respawnTimer.StartTimer(2);
+	}
+
+	private void GameEnd() 
+	{
+		SceneManager.LoadScene(0); // loads the main menu
 	}
 
 	void SetupGame()
