@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	private bool m_touchingLeftWall = false;
 	private bool m_touchingRightWall = false;
 
+	[HideInInspector]
+	public int UID;
+
 	// used to get components
 	private void Awake() {
 		m_rigidbody = GetComponent<Rigidbody2D>();
@@ -162,6 +165,8 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		// Filler function for now, will add proper damage logic later.
 
 		Debug.Log("Damage Taken");
+
+		GameManager.instance.TakeDamage(this);
 	}
 
 	//bool CheckGround() {
