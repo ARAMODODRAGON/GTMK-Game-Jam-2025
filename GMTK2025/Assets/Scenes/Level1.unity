@@ -3846,18 +3846,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 33825789477166211, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1473995826697392414, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6090911395895343965, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
-      propertyPath: roundTime
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 6090911395895343965, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
       propertyPath: spawnLoc1
       value: 
@@ -3874,10 +3862,6 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 2113799201}
-    - target: {fileID: 6090911395895343965, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
-      propertyPath: hitStopTime
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 6090911395895343965, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
       propertyPath: rightSpikes
       value: 
@@ -3925,10 +3909,6 @@ PrefabInstance:
     - target: {fileID: 8382336848028604302, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8382336848028604302, guid: 2e0c47a8e630fd248a58c776a69f0448, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
