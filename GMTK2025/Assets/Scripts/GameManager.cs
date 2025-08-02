@@ -130,8 +130,6 @@ public class GameManager : MonoBehaviour
 	void SetupGame()
 	{
 
-
-
 		player1Lives = player1LivesTotal;
 		player2Lives = player2LivesTotal;
 
@@ -147,6 +145,8 @@ public class GameManager : MonoBehaviour
 		player1Ref = spawnedObject.GetComponent<PlayerController>();
 		player1Ref.UID = 1;
 
+		EventBus.updatePlayerHealth.Invoke(player1Ref.UID, player1Lives);
+
 		spawnedObject = Instantiate(player2Prefab.gameObject, spawnLoc2.position, spawnLoc2.rotation);
 		if (spawnedObject == null)
 		{
@@ -157,7 +157,10 @@ public class GameManager : MonoBehaviour
 		player2Ref = spawnedObject.GetComponent<PlayerController>();
 		player2Ref.UID = 2;
 
+		EventBus.updatePlayerHealth.Invoke(player2Ref.UID, player2Lives);
+
 		roundTimer.StartTimer(roundTime);
+		roundTimer.onTimerUpdated.AddListener(EventBus.updateGameTimer.Invoke);
 	}
 
 	void ResetPlayerPositions()

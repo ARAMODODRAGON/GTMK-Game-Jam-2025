@@ -182,6 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81295fd533ef4644a8b0ffe252248c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_player1HP: {fileID: 4892717442966237342}
+  m_player2HP: {fileID: 3776384620961941766}
+  m_timer: {fileID: 5294443292011933303}
 --- !u!1 &2209370462004116053
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,6 +860,8 @@ GameObject:
   - component: {fileID: 1595174724881280028}
   - component: {fileID: 4634749709285207012}
   - component: {fileID: 8318458654748791404}
+  - component: {fileID: 7009744525121076751}
+  - component: {fileID: 6240876489099528032}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -938,3 +943,71 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8190884383960423623}
   m_Enabled: 1
+--- !u!114 &7009744525121076751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190884383960423623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c156e6f6232c55e4dbe56cc7a31a57a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 6240876489099528032}
+  screenShakeDuration: 0.2
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.6602938
+      outSlope: 1.6602938
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.14483954
+      value: 0.24047619
+      inSlope: 0.6695704
+      outSlope: 0.6695704
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2019704
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.28120592
+      outSlope: -0.28120592
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &6240876489099528032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190884383960423623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931e4aa1b3c0b8c47ab17a4ce17e71f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLooping: 0
+  totalTime: 0
+  currentTime: 0
+  onTimerFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  onTimerUpdated:
+    m_PersistentCalls:
+      m_Calls: []
