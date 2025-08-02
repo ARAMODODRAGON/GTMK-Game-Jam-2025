@@ -5,7 +5,7 @@ public class Mover : MonoBehaviour
 {
 
     public float moveSpeed;
-   Vector2 direction;
+    Vector2 direction;
 
     Rigidbody2D rb;
 
@@ -17,7 +17,7 @@ public class Mover : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (direction.magnitude > 0)
+        if (direction.magnitude > Util.very_small)
 		{
 			rb.linearVelocity = new Vector2(direction.x * moveSpeed * Time.fixedDeltaTime, direction.y * moveSpeed * Time.fixedDeltaTime);
         }
@@ -25,6 +25,7 @@ public class Mover : MonoBehaviour
 
     public void SetDirection(Vector2 dir_)
     {
+        Debug.Log("Direction set");
         direction = dir_;
     }
 }

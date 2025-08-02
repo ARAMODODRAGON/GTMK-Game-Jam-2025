@@ -144,6 +144,24 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flip"",
+                    ""type"": ""Button"",
+                    ""id"": ""56dac696-e42c-4e97-a74e-2f07fdfc78f0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FlipPlayer2"",
+                    ""type"": ""Button"",
+                    ""id"": ""99455d42-cc1e-437c-a887-90da120e0bf3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -498,6 +516,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""AttackPlayer2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c249d53-53ae-494a-8917-126901139acf"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3d3242c-d0a8-4477-88ed-3a786df546c2"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlipPlayer2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -573,6 +613,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_JumpPlayer2 = m_Player.FindAction("JumpPlayer2", throwIfNotFound: true);
         m_Player_MovePlayer2 = m_Player.FindAction("MovePlayer2", throwIfNotFound: true);
         m_Player_AttackPlayer2 = m_Player.FindAction("AttackPlayer2", throwIfNotFound: true);
+        m_Player_Flip = m_Player.FindAction("Flip", throwIfNotFound: true);
+        m_Player_FlipPlayer2 = m_Player.FindAction("FlipPlayer2", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -659,6 +701,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_JumpPlayer2;
     private readonly InputAction m_Player_MovePlayer2;
     private readonly InputAction m_Player_AttackPlayer2;
+    private readonly InputAction m_Player_Flip;
+    private readonly InputAction m_Player_FlipPlayer2;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -694,6 +738,14 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/AttackPlayer2".
         /// </summary>
         public InputAction @AttackPlayer2 => m_Wrapper.m_Player_AttackPlayer2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Flip".
+        /// </summary>
+        public InputAction @Flip => m_Wrapper.m_Player_Flip;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/FlipPlayer2".
+        /// </summary>
+        public InputAction @FlipPlayer2 => m_Wrapper.m_Player_FlipPlayer2;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -738,6 +790,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @AttackPlayer2.started += instance.OnAttackPlayer2;
             @AttackPlayer2.performed += instance.OnAttackPlayer2;
             @AttackPlayer2.canceled += instance.OnAttackPlayer2;
+            @Flip.started += instance.OnFlip;
+            @Flip.performed += instance.OnFlip;
+            @Flip.canceled += instance.OnFlip;
+            @FlipPlayer2.started += instance.OnFlipPlayer2;
+            @FlipPlayer2.performed += instance.OnFlipPlayer2;
+            @FlipPlayer2.canceled += instance.OnFlipPlayer2;
         }
 
         /// <summary>
@@ -767,6 +825,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @AttackPlayer2.started -= instance.OnAttackPlayer2;
             @AttackPlayer2.performed -= instance.OnAttackPlayer2;
             @AttackPlayer2.canceled -= instance.OnAttackPlayer2;
+            @Flip.started -= instance.OnFlip;
+            @Flip.performed -= instance.OnFlip;
+            @Flip.canceled -= instance.OnFlip;
+            @FlipPlayer2.started -= instance.OnFlipPlayer2;
+            @FlipPlayer2.performed -= instance.OnFlipPlayer2;
+            @FlipPlayer2.canceled -= instance.OnFlipPlayer2;
         }
 
         /// <summary>
@@ -914,5 +978,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttackPlayer2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Flip" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFlip(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FlipPlayer2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFlipPlayer2(InputAction.CallbackContext context);
     }
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6054219665846813547}
   - component: {fileID: 2533133134728312027}
   - component: {fileID: 5436603576666472632}
-  - component: {fileID: 1410806217454888962}
   - component: {fileID: 8102781052872295897}
   - component: {fileID: 6852229792490893032}
   - component: {fileID: 6384630049605190950}
@@ -31,12 +30,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258902898885366710}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38089356, y: -0.9246191, z: 0.00000019371514, w: -0.00000022351746}
-  m_LocalPosition: {x: -2.5600004, y: -2.530001, z: 0}
+  m_LocalRotation: {x: 0.9231367, y: -0.38447195, z: -0.000000021073426, w: -0.00000029502797}
+  m_LocalPosition: {x: 2.5300019, y: -2.560001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2903054147090818037}
+  m_Father: {fileID: 7537198042129749656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2533133134728312027
 SpriteRenderer:
@@ -100,7 +99,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258902898885366710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
   m_Name: 
@@ -116,20 +115,6 @@ MonoBehaviour:
   m_ObjectForwardAxis: 1
   m_ObjectUpAxis: 2
   m_StartOffset: 0
---- !u!114 &1410806217454888962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258902898885366710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7347041030de4fe41a6c8b356a303a16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballStopTime: 1
-  shouldBallDamageFor1Frame: 1
 --- !u!58 &8102781052872295897
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -180,6 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballStopTime: 1
   shouldBallDamageFor1Frame: 1
+  moveSpeed: 200
+  rotationScale: -1
 --- !u!114 &6384630049605190950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &898340891443007834
 Transform:
   m_ObjectHideFlags: 0
@@ -414,8 +401,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6054219665846813547}
   - {fileID: 898340891443007834}
+  - {fileID: 7537198042129749656}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &8048826772136300698
@@ -433,12 +420,12 @@ MonoBehaviour:
   moveAction: {fileID: -1521157963633576828, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   jumpAction: {fileID: 5622553066652624492, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   damageAction: {fileID: -7604662373179984123, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
+  flipAction: {fileID: -6469078102030826853, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_stats: {fileID: 11400000, guid: 9a582c758ee6af944a518729e9cc3684, type: 2}
   m_solidLayer:
     serializedVersion: 2
     m_Bits: 64
   m_touchingDistance: 0.2
-  m_ball: {fileID: 1410806217454888962}
   UID: 0
 --- !u!212 &7365720673219592660
 SpriteRenderer:
@@ -598,3 +585,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &7771382921937245258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7537198042129749656}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7537198042129749656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7771382921937245258}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6054219665846813547}
+  m_Father: {fileID: 2903054147090818037}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
