@@ -179,9 +179,10 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	public void OnTakeDamage()
 	{
 		// Filler function for now, will add proper damage logic later.
-
+		AudioManager.instance.PlaySound(AudioManager.instance.damageSound, transform.position, 1.0f, 1.0f, false);
 		GameManager.instance.TakeDamage(this);
 		GameManager.instance.ScreenShake();
+
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)

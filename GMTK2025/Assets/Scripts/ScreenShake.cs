@@ -30,14 +30,12 @@ public class ScreenShake : MonoBehaviour
 
     void ScreenShakeEffect(float currentTime_)
     {
-        Debug.Log("Shaking Screen");
         float strenght = animCurve.Evaluate(currentTime_ / screenShakeDuration);
 		cameraRef.transform.position = startPos + Random.insideUnitSphere * strenght;
     }
 
     void ResetShakeEffect()
     {
-		Debug.Log("ScreenShake Reset");
 		cameraRef.transform.position = startPos;
 	}
 
