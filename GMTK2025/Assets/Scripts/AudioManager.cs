@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
         }
 	}
 
-    public void PlaySound(AudioClip audio_, Vector3 position_, float volume_, float duration_,  bool persistent_ = false)
+    public void PlaySound(AudioClip audio_, Vector3 position_, float volume_, float duration_ = 0,  bool persistent_ = false)
     {
         AudioSource audio = Instantiate(soundEffectPrefab, position_, Quaternion.identity).GetComponent<AudioSource>();
 
@@ -39,6 +39,11 @@ public class AudioManager : MonoBehaviour
         audio.clip = audio_;
         audio.volume = volume_;
         audio.Play();
+
+        if (duration_ == 0)
+        {
+            duration_ = audio.clip.length;
+        }
 
         if (persistent_ == false)
         {

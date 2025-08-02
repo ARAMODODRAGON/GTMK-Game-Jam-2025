@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundEffectPrefab: {fileID: 2961284986187944841, guid: 3f70259f2ade14d4c8f515c3f2c1dad5, type: 3}
-  attackSound: {fileID: 8300000, guid: 7cce199fa4a6da645afa2b18841c5644, type: 3}
+  attackSound: {fileID: 8300000, guid: 8841730b7bbf45b459fe93c7374a4950, type: 3}
   damageSound: {fileID: 8300000, guid: 8c1e2b7e5b73c00448a8c767c856fd0a, type: 3}
   jumpSound: {fileID: 8300000, guid: 1268284d194d9994a8039ba57695b8ef, type: 3}
   uiConfirm: {fileID: 8300000, guid: f6d20c7fd2e6d134fbaa00fd72fb5c77, type: 3}

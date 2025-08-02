@@ -137,11 +137,14 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		// touching ground
 		if (inputPressedJump && m_touchingGround) 
 		{
+			AudioManager.instance.PlaySound(AudioManager.instance.jumpSound, transform.position, 1.0f, 0.0f, false);
 			_velocity.y = m_stats.jumpInitialSpeed;
 		}
 		// else touching either wall (using != garuntees its one *or* the other)
 		else if (inputPressedJump && (m_touchingLeftWall != m_touchingRightWall)) 
 		{
+
+			AudioManager.instance.PlaySound(AudioManager.instance.jumpSound, transform.position, 1.0f, 0.0f, false);
 			float direction = (m_touchingLeftWall ? 1.0f : -1.0f);
 
 			_velocity.y = m_stats.wallJumpInitialSpeed;

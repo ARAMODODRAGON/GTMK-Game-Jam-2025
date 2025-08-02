@@ -64,6 +64,8 @@ public class BallController : MonoBehaviour
 	{
 		if (!isRunningTimer)
 		{
+			AudioManager.instance.PlaySound(AudioManager.instance.attackSound, transform.position, 0.3f, 0.5f, false);
+
 			canDamage = true;
 			spriteRenderer.color = Color.red;
 			currentTimer = ballStopTime;
