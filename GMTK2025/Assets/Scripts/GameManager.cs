@@ -169,7 +169,6 @@ public class GameManager : MonoBehaviour
 
 	void MoveSpikes()
 	{
-		Debug.Log("Moving Spikes");
 		leftSpikes.GetComponent<Mover>().SetDirection(new Vector2(1, 0));
 		rightSpikes.GetComponent<Mover>().SetDirection(new Vector2(-1, 0));
 	}

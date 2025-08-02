@@ -34,7 +34,6 @@ public class Timer : MonoBehaviour
 			{
 				isRunning = false;
 				onTimerFinished.Invoke();
-				Debug.Log("Timer ended");
 				if (isLooping)
 				{
 					StartTimer(totalTime);

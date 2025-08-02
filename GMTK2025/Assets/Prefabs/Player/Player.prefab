@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8887210459747253833}
   - component: {fileID: 109987551892582036}
   - component: {fileID: 1736035190185449267}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
   m_TagString: Damageable
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1715203862463763384}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3808937, y: -0.92461896, z: 0.0000000842937, w: -0.00000002107343}
-  m_LocalPosition: {x: -2.51, y: -2.4640815, z: -2.2211708e-14}
+  m_LocalPosition: {x: -2.56, y: -2.53, z: -2.2684074e-14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 1325324132959108544}
   - component: {fileID: 4760520078790348789}
   - component: {fileID: 6401526538499995642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7607201130434351565}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
