@@ -25,7 +25,7 @@ public class MainMenuController : MonoBehaviour {
 			enabled = false;
 			return;
 		}
-		
+
 		// initialize menus
 		for (int i = 0; i < m_menus.Count; i++) {
 			// bind to OnMenuChange so that it knows which menu called it
@@ -33,7 +33,7 @@ public class MainMenuController : MonoBehaviour {
 			// bind to OnExitMenu
 			m_menus[i].exitMenu.AddListener(() => OnExitMenu(i));
 			// make invisible
-			m_menus[i].SetAlpha(0.0f);
+			m_menus[i].HideMenu();
 		}
 
 		// TODO: check if the game has already selected a level and load into a different menu from there
@@ -41,7 +41,7 @@ public class MainMenuController : MonoBehaviour {
 		// load first menu
 		if (m_menus.Count > 0) {
 			m_menuStack.Push(0);
-			m_currentMenu.SetAlpha(1.0f);
+			m_currentMenu.OpenMenu();
 		}
 	}
 
@@ -54,9 +54,9 @@ public class MainMenuController : MonoBehaviour {
 		if (menuIndex >= m_menuStack.Count || menuIndex < 0) return;
 
 		// now we change menus
-		m_currentMenu.SetAlpha(0.0f);
+		m_currentMenu.HideMenu();
 		m_menuStack.Push(menuIndex);
-		m_currentMenu.SetAlpha(0.0f);
+		m_currentMenu.OpenMenu();
 	}
 
 	private void OnExitMenu(int callerMenu) {
