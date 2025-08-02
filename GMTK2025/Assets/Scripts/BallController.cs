@@ -21,14 +21,18 @@ public class BallController : MonoBehaviour
 
 	HitStop hitStop;
 
+	Timer timer;
+
 	private void Start()
 	{
 		spline = GetComponent<SplineAnimate>();
 		circleCollider = GetComponent<CircleCollider2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		hitStop = GetComponent<HitStop>();
+		timer = GetComponent<Timer>();
 
 		circleCollider.enabled = false;
+		timer.onTimerFinished.AddListener(DisableBallDamage);
 
 		spriteRenderer.color = Color.blue;
 	}
@@ -43,6 +47,11 @@ public class BallController : MonoBehaviour
 			isRunningTimer = true;
 			spline.Pause();
 			circleCollider.enabled = true;
+
+			if (shouldBallDamageFor1Frame)
+			{
+				timer.StartTimer(0.02f);
+			}
 		}
 
 	}
@@ -73,6 +82,11 @@ public class BallController : MonoBehaviour
 		}
 	}
 
+	private void DisableBallDamage()
+	{
+		canDamage = false;
+	}
+
 	void Update()
 	{
 		if (currentTimer > 0)
@@ -82,11 +96,6 @@ public class BallController : MonoBehaviour
 			if (currentTimer <= 0)
 			{
 				StartBall();
-			}
-
-			if (shouldBallDamageFor1Frame && canDamage == true)
-			{
-				canDamage = false;
 			}
 		}
 	}
