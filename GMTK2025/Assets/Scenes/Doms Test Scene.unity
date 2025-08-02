@@ -598,14 +598,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleUI
       objectReference: {fileID: 0}
-    - target: {fileID: 1595174724881280028, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1595174724881280028, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9141826403568995663, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

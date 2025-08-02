@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectHandler : BaseMenuScreen {
 
@@ -68,6 +69,7 @@ public class LevelSelectHandler : BaseMenuScreen {
 			}
 
 			// load level
+			SceneManager.LoadScene(m_menuOptions[m_optionIndex].loadLevelIndex);
 		}
 	}
 	
