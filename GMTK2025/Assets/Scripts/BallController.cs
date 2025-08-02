@@ -18,7 +18,10 @@ public class BallController : MonoBehaviour
 
 	SpriteRenderer spriteRenderer;
 
-	Timer timer;
+	[SerializeField]
+	Timer ballDamageWindowTimer;
+	[SerializeField]
+	Timer ballFlipWindowTimer;
 
 	[SerializeField]
 	float moveSpeed;
@@ -26,19 +29,24 @@ public class BallController : MonoBehaviour
 	float angle = 0;
 	[SerializeField]
 	float rotationScale;
+	bool canFlip;
+	[SerializeField]
+	float ballFlipTimer;
 
 	private void Start()
 	{
 		spline = GetComponent<SplineAnimate>();
 		circleCollider = GetComponent<CircleCollider2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		timer = GetComponent<Timer>();
+		ballDamageWindowTimer = GetComponent<Timer>();
 
 		circleCollider.enabled = false;
-		timer.onTimerFinished.AddListener(DisableBallDamage);
+		ballDamageWindowTimer.onTimerFinished.AddListener(DisableBallDamage);
+		ballFlipWindowTimer.onTimerFinished.AddListener(ResetFlipWindow);
 
 		spriteRenderer.color = Color.blue;
 		canRotate = true;
+		canFlip = true;
 	}
 
 	private void FixedUpdate()
@@ -65,7 +73,7 @@ public class BallController : MonoBehaviour
 
 			if (shouldBallDamageFor1Frame)
 			{
-				timer.StartTimer(0.1f); ;
+				ballDamageWindowTimer.StartTimer(0.1f); ;
 			}
 		}
 
@@ -99,19 +107,30 @@ public class BallController : MonoBehaviour
 
 	private void DisableBallDamage()
 	{
+		spriteRenderer.color = Color.lightBlue;
 		canDamage = false;
 	}
 
 	public void FlipRotationScale()
 	{
-		rotationScale *= -1;
+		if (canFlip)
+		{
+			rotationScale *= -1;
+			canFlip = false;
+			ballFlipWindowTimer.StartTimer(ballFlipTimer);
+		}
+
+	}
+
+	void ResetFlipWindow()
+	{
+		canFlip = true;
 	}
 
 	void Update()
 	{
 		if (currentTimer > 0)
 		{
-			//Debug.Log("CountingDown");
 			currentTimer -= Time.deltaTime;
 			if (currentTimer <= 0)
 			{
