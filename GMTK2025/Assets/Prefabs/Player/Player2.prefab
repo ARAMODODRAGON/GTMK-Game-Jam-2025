@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6054219665846813547}
   - component: {fileID: 2533133134728312027}
-  - component: {fileID: 5436603576666472632}
   - component: {fileID: 8102781052872295897}
   - component: {fileID: 6852229792490893032}
   - component: {fileID: 6384630049605190950}
@@ -93,29 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5436603576666472632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258902898885366710}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 8882970758118061083}
-  m_PlayOnAwake: 1
-  m_LoopMode: 1
-  m_Method: 0
-  m_Duration: 1
-  m_MaxSpeed: 42.17125
-  m_EasingMode: 0
-  m_AlignmentMode: 1
-  m_ObjectForwardAxis: 1
-  m_ObjectUpAxis: 2
-  m_StartOffset: 0
 --- !u!58 &8102781052872295897
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -171,8 +147,10 @@ MonoBehaviour:
   moveSpeed: 200
   rotationScale: -1
   ballFlipTimer: 0.5
-  attackSpinSpeed: 0
-  regularSpinSpeed: 0
+  attackSpinSpeed: 10000
+  regularSpinSpeed: 1000
+  opacityWhenSpinning: 0.2
+  attackScalar: 1.7
 --- !u!114 &6384630049605190950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,158 +220,6 @@ MonoBehaviour:
   onTimerUpdated:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &509117859880391792
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 898340891443007834}
-  - component: {fileID: 8882970758118061083}
-  m_Layer: 0
-  m_Name: Spline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &898340891443007834
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509117859880391792}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.56, y: -2.53, z: 0}
-  m_LocalScale: {x: 0.49815035, y: 0.49815035, z: 0.49815035}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2903054147090818037}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8882970758118061083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509117859880391792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Spline:
-    m_EditModeType: 1
-    m_Knots: []
-    m_MetaData: []
-    m_Closed: 0
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
-  m_Splines:
-  - m_EditModeType: 1
-    m_Knots:
-    - Position:
-        x: 0
-        y: 0
-        z: 0
-      TangentIn:
-        x: -0
-        y: -0
-        z: -2.3663366
-      TangentOut:
-        x: 0
-        y: 0
-        z: 2.3693633
-      Rotation:
-        value:
-          x: -0.6538043
-          y: -0.26933253
-          z: 0.2693325
-          w: 0.6538043
-    - Position:
-        x: 0.0000019073486
-        y: 10.020056
-        z: 0
-      TangentIn:
-        x: -0
-        y: -0
-        z: -2.3602285
-      TangentOut:
-        x: 0
-        y: 0
-        z: 2.3632648
-      Rotation:
-        value:
-          x: 0.65310735
-          y: -0.2710178
-          z: 0.27101788
-          w: -0.6531074
-    - Position:
-        x: 10.045822
-        y: 9.99423
-        z: 0
-      TangentIn:
-        x: -0
-        y: -0
-        z: -2.3663244
-      TangentOut:
-        x: 0
-        y: 0
-        z: 2.3693755
-      Rotation:
-        value:
-          x: -0.26934016
-          y: 0.6538011
-          z: -0.6538011
-          w: 0.26934016
-    - Position:
-        x: 9.994173
-        y: -0.07741356
-        z: 0
-      TangentIn:
-        x: -0
-        y: -0
-        z: -2.3662648
-      TangentOut:
-        x: 0
-        y: 0
-        z: 2.3571663
-      Rotation:
-        value:
-          x: -0.2726992
-          y: -0.65240717
-          z: 0.6524072
-          w: 0.27269915
-    m_MetaData:
-    - Mode: 4
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    m_Closed: 1
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
-  m_Knots:
-    m_KnotsLink: []
 --- !u!1 &7693438355736191387
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +254,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 898340891443007834}
   - {fileID: 7537198042129749656}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
