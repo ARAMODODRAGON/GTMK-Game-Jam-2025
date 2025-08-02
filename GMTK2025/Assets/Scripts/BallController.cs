@@ -8,6 +8,7 @@ public class BallController : MonoBehaviour
 	[SerializeField]
 	bool shouldBallDamageFor1Frame;
 	bool canDamage = false;
+	bool canRotate;
 
 	float currentTimer;
 	bool isRunningTimer = false;
@@ -18,6 +19,13 @@ public class BallController : MonoBehaviour
 	SpriteRenderer spriteRenderer;
 
 	Timer timer;
+
+	[SerializeField]
+	float moveSpeed;
+
+	float angle = 0;
+	[SerializeField]
+	float rotationScale;
 
 	private void Start()
 	{
@@ -30,6 +38,18 @@ public class BallController : MonoBehaviour
 		timer.onTimerFinished.AddListener(DisableBallDamage);
 
 		spriteRenderer.color = Color.blue;
+		canRotate = true;
+	}
+
+	private void FixedUpdate()
+	{
+		
+        if (canRotate)
+        {
+			angle += (moveSpeed * Time.fixedDeltaTime * rotationScale);
+			transform.parent.localEulerAngles = new Vector3(transform.parent.localEulerAngles.x, transform.parent.localEulerAngles.y, angle);
+		}
+
 	}
 
 	public void StopBall()
@@ -40,12 +60,12 @@ public class BallController : MonoBehaviour
 			spriteRenderer.color = Color.red;
 			currentTimer = ballStopTime;
 			isRunningTimer = true;
-			spline.Pause();
+			canRotate = false;
 			circleCollider.enabled = true;
 
 			if (shouldBallDamageFor1Frame)
 			{
-				timer.StartTimer(0.02f);
+				timer.StartTimer(0.1f); ;
 			}
 		}
 
@@ -60,6 +80,7 @@ public class BallController : MonoBehaviour
 		circleCollider.enabled = false;
 		spline.Play();
 		canDamage = false;
+		canRotate = true;
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)
@@ -79,6 +100,11 @@ public class BallController : MonoBehaviour
 	private void DisableBallDamage()
 	{
 		canDamage = false;
+	}
+
+	public void FlipRotationScale()
+	{
+		rotationScale *= -1;
 	}
 
 	void Update()

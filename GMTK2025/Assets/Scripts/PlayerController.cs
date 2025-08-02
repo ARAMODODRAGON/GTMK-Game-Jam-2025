@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	public InputActionReference moveAction;
 	public InputActionReference jumpAction;
 	public InputActionReference damageAction;
+	public InputActionReference flipAction;
 	//PlayerInput playerInput;
 
 	// components
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
 	// references
 	[Header("References")]
-	[SerializeField] private BallController m_ball;
+	BallController m_ball;
 
 	// private variables
 	private bool m_lastjumpinput = true;
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	{
 		m_rigidbody = GetComponent<Rigidbody2D>();
 		m_boxCollider = GetComponent<BoxCollider2D>();
+		m_ball = GetComponentInChildren<BallController>();
 	}
 
 	// initialization
@@ -61,8 +63,14 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	void Update() 
 	{
 		// send input to ball
-		if (damageAction.action.WasPressedThisFrame()) {
+		if (damageAction.action.WasPressedThisFrame()) 
+		{
 			m_ball.StopBall();
+		}
+
+		if (flipAction.action.WasPressedThisFrame())
+		{
+			m_ball.FlipRotationScale();
 		}
 	}
 
@@ -82,7 +90,9 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
 		// store jump input for next step
 		m_lastjumpinput = _inputJump;
-	}
+
+        
+    }
 
 	private void HandlePhysics(float delta, Vector2 inputDirection, bool inputJumpHeld, bool inputPressedJump) 
 	{

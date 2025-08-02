@@ -155,6 +155,8 @@ public class GameManager : MonoBehaviour
 		rightSpikes.transform.position = rightSpikesPos;
 		rightSpikes.GetComponent<Mover>().SetDirection(new Vector2(0, 0));
 
+		roundTimer.StartTimer(roundTime);
+
 
 		player1Ref.transform.position = new Vector2 (spawnLoc1.position.x, spawnLoc1.position.y);
 		player2Ref.transform.position = new Vector2 (spawnLoc2.position.x, spawnLoc2.position.y);
@@ -167,6 +169,7 @@ public class GameManager : MonoBehaviour
 
 	void MoveSpikes()
 	{
+		Debug.Log("Moving Spikes");
 		leftSpikes.GetComponent<Mover>().SetDirection(new Vector2(1, 0));
 		rightSpikes.GetComponent<Mover>().SetDirection(new Vector2(-1, 0));
 	}
