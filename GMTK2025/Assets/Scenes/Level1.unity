@@ -3704,32 +3704,6 @@ Transform:
   - {fileID: 493907489}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1981487964 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1306612266449537818, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
-  m_PrefabInstance: {fileID: 2113799200}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1981487967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981487964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931e4aa1b3c0b8c47ab17a4ce17e71f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isLooping: 0
-  totalTime: 0
-  currentTime: 0
-  onTimerFinished:
-    m_PersistentCalls:
-      m_Calls: []
-  onTimerUpdated:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2100408751
 GameObject:
   m_ObjectHideFlags: 0
@@ -3781,10 +3755,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7089907235926510999, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
-      propertyPath: m_endDelayTimer
-      value: 
-      objectReference: {fileID: 1981487967}
+    - target: {fileID: 3768624484165923326, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9141826403568995663, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3828,10 +3802,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1306612266449537818, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1981487967}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c5cce9d35ff4664ba0ba832ceb6f1d4, type: 3}
 --- !u!1 &2113799201 stripped
 GameObject:

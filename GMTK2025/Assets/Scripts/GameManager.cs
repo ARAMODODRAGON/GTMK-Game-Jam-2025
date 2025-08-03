@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 
 			if (player1LivesTotal <= 0)
 			{
-				EventBus.announceWinner.Invoke(player_.UID);
+				EventBus.announceWinner.Invoke(2);
 				roundTimer.StopTimer();
 			}
 		}
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
 
 			if (player2LivesTotal <= 0)
 			{
-				EventBus.announceWinner.Invoke(player_.UID);
+				EventBus.announceWinner.Invoke(1);
 				roundTimer.StopTimer();
 			}
 		}

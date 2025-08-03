@@ -146,6 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9141826403568995663}
   - component: {fileID: 7089907235926510999}
+  - component: {fileID: 2143654495062710704}
   m_Layer: 0
   m_Name: BattleUI
   m_TagString: Untagged
@@ -187,8 +188,30 @@ MonoBehaviour:
   m_timer: {fileID: 5294443292011933303}
   m_announcmentTransform: {fileID: 2948869310155117278}
   m_announcmentText: {fileID: 7001084541149800171}
+  m_endDelayTimer: {fileID: 2143654495062710704}
   m_endDelay: 4
   m_transformSpeed: 100
+--- !u!114 &2143654495062710704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306612266449537818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931e4aa1b3c0b8c47ab17a4ce17e71f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLooping: 0
+  totalTime: 0
+  currentTime: 0
+  onTimerFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  onTimerUpdated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2209370462004116053
 GameObject:
   m_ObjectHideFlags: 0
