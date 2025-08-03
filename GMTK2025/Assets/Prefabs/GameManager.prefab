@@ -60,6 +60,8 @@ MonoBehaviour:
   respawnTimer: {fileID: 1473995826697392414}
   roundTimer: {fileID: 33825789477166211}
   mainCamera: {fileID: 0}
+  ballStopParticleSystem: {fileID: 3122666214355249827, guid: ade0cc75abdb8844e89bdf21b453c59d, type: 3}
+  damageParticleSystem: {fileID: 3676434223810656656, guid: 27a42c3297ca13b41a741b2ffdf662d5, type: 3}
 --- !u!114 &1473995826697392414
 MonoBehaviour:
   m_ObjectHideFlags: 0

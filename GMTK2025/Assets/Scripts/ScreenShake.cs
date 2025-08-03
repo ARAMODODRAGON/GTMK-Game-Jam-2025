@@ -15,6 +15,11 @@ public class ScreenShake : MonoBehaviour
     [SerializeField]
     AnimationCurve animCurve;
 
+	[SerializeField]
+	AnimationCurve animCurveSmall;
+
+    AnimationCurve activeCurve;
+
 	void Start()
     {
         timer.onTimerUpdated.AddListener(ScreenShakeEffect);
@@ -24,13 +29,22 @@ public class ScreenShake : MonoBehaviour
     public void StartScreenShake(GameObject camera_)
     {
 		cameraRef = camera_;
+        activeCurve = animCurve;
 		startPos = cameraRef.transform.position;
         timer.StartTimer(screenShakeDuration);
 	}
 
-    void ScreenShakeEffect(float currentTime_)
+	public void StartScreenShakeSmall(GameObject camera_)
+	{
+		cameraRef = camera_;
+		activeCurve = animCurveSmall;
+		startPos = cameraRef.transform.position;
+		timer.StartTimer(screenShakeDuration);
+	}
+
+	void ScreenShakeEffect(float currentTime_)
     {
-        float strenght = animCurve.Evaluate(currentTime_ / screenShakeDuration);
+        float strenght = activeCurve.Evaluate(currentTime_ / screenShakeDuration);
 		cameraRef.transform.position = startPos + Random.insideUnitSphere * strenght;
     }
 

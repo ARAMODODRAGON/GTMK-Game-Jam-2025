@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
 	GameObject mainCamera;
 	ScreenShake screenShake;
 
+	[SerializeField]
+	GameObject ballStopParticleSystem;
+	[SerializeField]
+	GameObject damageParticleSystem;
+
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Awake()
 	{
@@ -202,6 +207,35 @@ public class GameManager : MonoBehaviour
 	public void ScreenShake()
 	{
 		screenShake.StartScreenShake(mainCamera);
+	}
+
+	public void ScreenShakeSmall()
+	{
+		screenShake.StartScreenShakeSmall(mainCamera);
+	}
+
+	public void CreateDamageParticleSystem(Vector2 location_)
+	{
+		ParticleSystem particle = Instantiate(damageParticleSystem, location_, Quaternion.identity).GetComponent<ParticleSystem>();
+		if (particle == null)
+		{
+			Debug.Log("Particle System couldn't be spawned");
+			return;
+		}
+
+		Destroy(particle, particle.main.duration);
+	}
+
+	public void CreateBallStopParticleSystem(Vector2 location_)
+	{
+		ParticleSystem particle = Instantiate(ballStopParticleSystem, location_, Quaternion.identity).GetComponent<ParticleSystem>();
+		if (particle == null)
+		{
+			Debug.Log("Particle System couldn't be spawned");
+			return;
+		}
+
+		Destroy(particle, particle.main.duration);
 	}
 
 	// Update is called once per frame

@@ -207,6 +207,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	{
 		// Filler function for now, will add proper damage logic later.
 		AudioManager.instance.PlaySound(AudioManager.instance.damageSound, transform.position, 0.4f, 1.0f, false);
+		GameManager.instance.CreateDamageParticleSystem(transform.position);
 		GameManager.instance.TakeDamage(this);
 		GameManager.instance.ScreenShake();
 

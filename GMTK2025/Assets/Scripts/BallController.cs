@@ -86,6 +86,9 @@ public class BallController : MonoBehaviour
 			canRotate = false;
 			circleCollider.enabled = true;
 
+			GameManager.instance.CreateBallStopParticleSystem(transform.position);
+			GameManager.instance.ScreenShakeSmall();
+
 			if (shouldBallDamageFor1Frame)
 			{
 				ballDamageWindowTimer.StartTimer(0.1f); ;
