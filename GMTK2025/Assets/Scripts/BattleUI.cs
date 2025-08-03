@@ -19,12 +19,15 @@ public class BattleUI : MonoBehaviour {
 	[SerializeField] private float m_endDelay;
 	[SerializeField] private float m_transformSpeed;
 
+	private float positionY;
+
 	private void Awake() {
 		EventBus.updatePlayerHealth.AddListener(UpdatePlayerHP);
 		EventBus.updateGameTimer.AddListener(UpdateGameTimer);
 		EventBus.announceWinner.AddListener(AnnounceWinner);
 		m_endDelayTimer.onTimerFinished.AddListener(EventBus.gameEnd.Invoke);
 		m_endDelayTimer.onTimerUpdated.AddListener(UpdateEndGame);
+		positionY = m_announcmentTransform.position.y;
 	}
 
 	private void UpdatePlayerHP(int playerindex, int hpvalue) {
@@ -50,5 +53,6 @@ public class BattleUI : MonoBehaviour {
 		Vector3 position = m_announcmentTransform.position;
 		position.y = Util.MoveToward(position.y, 0.0f, m_transformSpeed * Time.deltaTime);
 		m_announcmentTransform.position = position;
+		Debug.Log($"time: {remainingTime}");
 	}
 }
