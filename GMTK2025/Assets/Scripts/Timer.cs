@@ -57,5 +57,12 @@ public class Timer : MonoBehaviour
 		onTimerUpdated.RemoveAllListeners();
 	}
 
+	public void Pause()
+	{
+		isRunning = false;
+	}
+
+	public bool IsRunning() { return isRunning; }
+
 
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,6 +39,22 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	private bool m_touchingLeftWall = false;
 	private bool m_touchingRightWall = false;
 
+	SpriteRenderer spriteRenderer;
+
+	[SerializeField]
+	Sprite idleSprite;
+	[SerializeField]
+	Sprite walkSprite;
+	[SerializeField]
+	Sprite jumpSprite;
+	[SerializeField]
+	Sprite slideSprite;
+
+	[SerializeField]
+	float walkCycleSpeed;
+
+	Timer timer;
+
 	[HideInInspector]
 	public int UID;
 
@@ -47,6 +64,9 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		m_rigidbody = GetComponent<Rigidbody2D>();
 		m_boxCollider = GetComponent<BoxCollider2D>();
 		m_ball = GetComponentInChildren<BallController>();
+		timer = GetComponent<Timer>();
+
+		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	// initialization
@@ -57,6 +77,8 @@ public class PlayerController : MonoBehaviour, IDamageable {
 			Debug.LogError("stats was not set on player \"" + name + "\"");
 			return;
 		}
+
+		timer.onTimerFinished.AddListener(HandleWalkAnimation);
 	}
 
 	// update is called once per frame
@@ -72,6 +94,8 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		{
 			m_ball.FlipRotationScale();
 		}
+
+		HandleAnimation();
 	}
 
 	// used to handle physics
@@ -199,5 +223,59 @@ public class PlayerController : MonoBehaviour, IDamageable {
 		}
 	}
 
+	void HandleAnimation()
+	{
+		Vector2 inputDirection = moveAction.action.ReadValue<Vector2>();
+
+
+		if (inputDirection.x > 0)
+		{
+			spriteRenderer.flipX = false;
+		}
+		else if (inputDirection.x < 0)
+		{
+			spriteRenderer.flipX = true;
+		}
+
+		if (m_touchingLeftWall || m_touchingRightWall)
+		{
+			spriteRenderer.sprite = slideSprite;
+			timer.Pause();
+			return;
+		}
+		else if (inputDirection.x != 0 && m_touchingGround)
+		{
+			//Walk Anim
+			if (timer.IsRunning() == false)
+			{
+				timer.StartTimer(walkCycleSpeed);
+			}
+			return;
+		}
+		else if (m_touchingGround == false)
+		{
+			spriteRenderer.sprite = jumpSprite;
+			timer.Pause();
+			return;
+		}
+		else if (inputDirection.x == 0 && m_touchingGround)
+		{
+			spriteRenderer.sprite = idleSprite;
+			timer.Pause();
+			return;
+		}
+	}
+
+	void HandleWalkAnimation()
+	{
+		if (spriteRenderer.sprite == idleSprite)
+		{
+			spriteRenderer.sprite = walkSprite;
+		}
+		else
+		{
+			spriteRenderer.sprite = idleSprite;
+		}
+	}
 
 }
