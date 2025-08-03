@@ -35,14 +35,14 @@ public class BattleUI : MonoBehaviour {
 	}
 
 	private void UpdateGameTimer(float time) {
-		m_timer.text = $"{time:.}s";
+		m_timer.text = $"{time:.}";
 	}
 
 	private void AnnounceWinner(int playerindex) {
 		m_endDelayTimer.StartTimer(m_endDelay);
 
 		m_announcmentText.text = "PLAYER " + playerindex + "\nWON!";
-		m_timer.text = "";
+		m_timer.text = "0";
 	}
 
 	private void UpdateEndGame(float remainingTime) {
