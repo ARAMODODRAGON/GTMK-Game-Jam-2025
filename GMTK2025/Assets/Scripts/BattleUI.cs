@@ -10,6 +10,7 @@ public class BattleUI : MonoBehaviour {
 	[SerializeField] private TextMeshProUGUI m_timer;
 	[SerializeField] private RectTransform m_announcmentTransform;
 	[SerializeField] private TextMeshProUGUI m_announcmentText;
+	//[SerializeField] private AudioSource m_audioSource;
 
 	// components
 	[SerializeField] private Timer m_endDelayTimer;
